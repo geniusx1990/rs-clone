@@ -1,1 +1,4 @@
-console.log('test webpack');
+import App from './pages/app/app';
+
+const app = new App();
+app.start();

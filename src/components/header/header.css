@@ -1,0 +1,30 @@
+.header_logo {
+    width: 100px;
+    height: 100px;
+    --icon-url: url("../../assets/cute_cow.svg");
+    mask-image: var(--icon-url);
+    -webkit-mask-image: var(--icon-url);
+    background-color: currentColor;
+    color: currentColor;
+
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigation {
+    width: 80%;
+}
+
+.navigation-list {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
