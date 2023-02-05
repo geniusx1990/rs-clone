@@ -1,0 +1,40 @@
+body {
+  height: 100%;
+  &.lock {
+    overflow: hidden;
+  }
+}
+
+.main-page {
+  margin: 0 auto;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  min-height: 95vh;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1%;
+  margin-top: auto;
+  color: var(--var-links);
+  transition: all 0.7s;
+  &__link {
+    color: var(--var-links);
+    transition: all 0.7s;
+  }
+  &__rss {
+    width: 90px;
+  }
+  &__rss-img {
+    max-width: 100%;
+    transition: all 0.7s;
+    &:hover,
+    &:active {
+      transition: all 0.7s;
+      filter: brightness(0) saturate(100%) invert(100%) sepia(2%) saturate(639%) hue-rotate(208deg) brightness(115%) contrast(87%);
+    }
+  }
+}
