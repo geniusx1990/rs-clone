@@ -4,6 +4,10 @@
   background: url(./assets/cute_cow.svg) no-repeat;
   cursor: pointer;
   transition: all 0.7s;
+  &:hover,
+  &:active {
+  background: url(./assets/cute_cow_hover.svg) no-repeat;
+  }
 }
 
 .header-wrapper {
