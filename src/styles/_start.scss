@@ -4,7 +4,22 @@ body {
     overflow: hidden;
   }
 }
-
+.btn {
+  background-color: var(--var-links);
+  color: var(--var-white);
+  border: 1px solid var(--var-links);
+  border-radius: 2px;
+  padding: 10px 70px;
+  font-size: var(--var-font-small);
+  transition: all 0.7s;
+  cursor: pointer;
+  &:hover,
+  &:active {
+    background-color: #FFD700;
+      transition: all 0.7s;
+      color: var(--var-black);
+  }
+}
 .main-page {
   margin: 0 auto;
   padding: 1%;
@@ -12,7 +27,16 @@ body {
   flex-direction: column;
   min-height: 95vh;
 }
-
+.start {
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  justify-content: center;
+  align-items: center;
+  &__header {
+    color: var(--var-white);
+  }
+}
 .footer {
   display: flex;
   justify-content: space-between;
