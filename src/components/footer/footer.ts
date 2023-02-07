@@ -8,6 +8,7 @@ class Footer extends Component {
 
   makeFooter() {
     return `
+    <div class="footer__container">
     <div class="footer__author ">
     <span>&copy; 2023</span>
       </div>
@@ -18,6 +19,7 @@ class Footer extends Component {
     <a href="https://rs.school/js/" class="footer__link">
       <img src="https://rs.school/images/rs_school.svg" class="footer__rss-img" alt="RSS logo">
     </a>
+  </div>
   </div>
     `;
   }
