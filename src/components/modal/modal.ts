@@ -12,9 +12,27 @@ class Modal extends Component {
         const modalContent = document.createElement('div');
         modalContent.className = 'modal-content';
 
-        const close = document.createElement('span');
+        const close = document.createElement('div');
         close.className = 'close';
-        close.textContent = 'X;';
+
+        const closeSpan1 = document.createElement('span');
+        closeSpan1.className = 'modal__close-line'
+        const closeSpan2 = document.createElement('span');
+        closeSpan2.className = 'modal__close-line'
+
+        close.append(closeSpan1, closeSpan2);
+
+        close.addEventListener('click', () => {
+            const modal = <HTMLElement>document.querySelector('.modal');
+            modal.style.display = 'none';
+        })
+
+        window.addEventListener('click', (e) => {
+            const target = <HTMLElement>e.target;
+            if (target.classList.contains('modal')) {
+                target.style.display = 'none';
+            }
+        })
 
         const inputEmail = document.createElement('input');
         inputEmail.type = 'email';

@@ -60,11 +60,6 @@ class Header extends Component {
 
     navigation.append(navigationList);
 
-    const link = document.querySelector('.nav-link nav-log-in');
-
-    console.log(link)
-
-
     /*  const html = `
          <ul class="navigation-list">
          <li class="navigation-item"><a href="#" class="nav-link nav-tour">Tour</a></li>
