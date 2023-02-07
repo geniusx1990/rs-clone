@@ -14,7 +14,7 @@ class MainPage extends Page {
         this.section = new MainSection('section', 'main-section');
         this.footer = new Footer('footer', 'footer')
 
-        
+
     }
 
 
