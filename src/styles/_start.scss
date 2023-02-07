@@ -4,6 +4,7 @@ body {
     overflow: hidden;
   }
 }
+
 .btn {
   background-color: var(--var-links);
   color: var(--var-white);
@@ -20,6 +21,9 @@ body {
       color: var(--var-black);
   }
 }
+.start__btn {
+  margin-bottom: 1%;
+}
 .main-page {
   margin: 0 auto;
   padding: 1%;
@@ -33,8 +37,52 @@ body {
   padding: 1%;
   justify-content: center;
   align-items: center;
+  height: 70vh;
   &__header {
     color: var(--var-white);
+  }
+}
+.slider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 95%;
+  width: 95%;
+  overflow: hidden;
+  &__image{
+flex: 0 1 100%;
+margin-bottom: 1%;
+
+  }
+    &__img{
+    width: 100%;
+    height: 100%;
+    transition: all 0.7s;
+    animation: 10s infinite alternate slidein;
+      }
+  &__btns {
+    text-align: center;
+  }
+}
+.slider__one {
+  background: url(./assets/one.png) 50%/contain no-repeat;
+}
+.slider__two {
+  background: url(./assets/two.png) 50%/contain no-repeat;
+}
+.slider__three {
+  background: url(./assets/three.png) 50%/contain no-repeat;
+}
+.slider__four {
+  background: url(./assets/four.png) 50%/contain no-repeat;
+}
+@keyframes slidein {
+  from {
+    transform: translateX(-20%);
+  }
+
+  to {
+    transform: translateX(20%);
   }
 }
 .footer {
