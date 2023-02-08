@@ -14,16 +14,6 @@ export class MainSection extends Component {
     header.className = 'start';
     createEl('h1', 'start__header', header, 'The smart to-do app for busy people!');
     createEl('button', 'btn start__btn', header, 'Sign up');
-
-    // const imageWrap = document.createElement("div");
-    // const image = document.createElement("div");
-    // imageWrap.classList.add('slider__image');
-    // image.classList.add('slider__img');
-
-    // imageWrap.append(image);
-
-    // this.slider.append(imageWrap, this.makeSliderBtn());
-
     this.slider.innerHTML = this.makeSliderBtn();
     header.append(this.slider);
     return header;
