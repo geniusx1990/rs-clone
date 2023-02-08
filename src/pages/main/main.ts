@@ -24,9 +24,6 @@ class MainPage extends Page {
         this.container.append(this.section.render());
         this.container.append(this.footer.render());
 
-
-
-
         return this.container
 
     }
