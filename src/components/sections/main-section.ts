@@ -24,7 +24,7 @@ export class MainSection extends Component {
   makeSliderBtn() {
     return `
     <div class="slider__image">
-      <div class="slider__img slider__one" preload="lazy"></div>
+      <div class="slider__img slider-en slider__one" preload="lazy"></div>
     </div>
     <div class="slider__btns">
       <input type="radio" class="slider__button" id="btn-one" name="scales" checked>

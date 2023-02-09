@@ -89,22 +89,30 @@ body {
     }
 }
 
-.slider__one {
+.slider-en.slider__one {
     background: url(./assets/one.png) 50%/contain no-repeat;
 }
-
-.slider__two {
+.slider-ru.slider__one {
+  background: url(./assets/one-ru.png) 50%/contain no-repeat;
+}
+.slider-en.slider__two {
     background: url(./assets/two.png) 50%/contain no-repeat;
 }
-
-.slider__three {
+.slider-ru.slider__two {
+    background: url(./assets/two-ru.png) 50%/contain no-repeat;
+}
+.slider-en.slider__three {
     background: url(./assets/three.png) 50%/contain no-repeat;
 }
-
-.slider__four {
+.slider-ru.slider__three {
+    background: url(./assets/three-ru.png) 50%/contain no-repeat;
+}
+.slider-en.slider__four {
     background: url(./assets/four.png) 50%/contain no-repeat;
 }
-
+.slider-ru.slider__four {
+  background: url(./assets/four-ru.png) 50%/contain no-repeat;
+}
 @keyframes slidein {
     from {
         transform: translateX(-20%);

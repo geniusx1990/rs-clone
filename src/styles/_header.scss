@@ -93,3 +93,16 @@ a {
         background-image: url(./assets/search.svg) no-repeat;
     }
 }
+.header__langs {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 3px;
+}
+.lang__label {
+  cursor: pointer;
+  font-weight: 700;
+  &:hover {
+    color: var(--var-white);
+    transition: all 0.6s;
+  }
+}

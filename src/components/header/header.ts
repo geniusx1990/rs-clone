@@ -15,14 +15,25 @@ class Header extends Component {
     const logo = document.createElement('div');
     logo.className = 'header_logo';
     headerWrapper.append(logo);
-
-    const logoTitle = createEl("div", "header__title", logo, "Remember the milk");
-
+    createEl("div", "header__title", logo, "Remember the milk");
+    headerWrapper.append(this.renderLangs());
     headerWrapper.append(this.renderLinks());
 
     return headerWrapper;
   }
+  renderLangs() {
+    const el = document.createElement('div');
 
+    el.classList.add('header__langs');
+
+    const html = `
+    <label class="lang__label lang-label-en" for="en">EN<input type="radio" class="lang__button" id="en" name="langs" checked></label>
+    <label  class="lang__label lang-label-ru"for="ru">RU<input type="radio"  class="lang__button"id="ru" name="langs"></label>
+
+    `;
+    el.innerHTML = html;
+    return el;
+  }
 
   renderLinks() {
     const navigation = document.createElement('nav');
@@ -31,8 +42,8 @@ class Header extends Component {
     const navigationList = document.createElement('ul');
     navigationList.className = 'navigation-list';
 
-    const arrClasses = ['nav-link nav-tour', 'nav-link nav-help', 'nav-link nav-log-in', 'nav-link nav-sign-up'];
-    const arrNames = ['Tour', 'Help', 'Log in', 'Sign Up for free'];
+    const arrClasses = ['nav-link nav-help', 'nav-link nav-log-in', 'nav-link nav-sign-up'];
+    const arrNames = ['Help', 'Log in', 'Sign Up for free'];
 
     arrClasses.forEach((num1, index) => {
       const num2 = arrNames[index];
@@ -45,7 +56,7 @@ class Header extends Component {
       aElement.textContent = num2;
       //aElement.href = '#';
 
-      if (index == 2) {
+      if (index == 1) {
         console.log(num2)
 
         aElement.addEventListener('click', () => {
@@ -59,16 +70,6 @@ class Header extends Component {
     })
 
     navigation.append(navigationList);
-
-    /*  const html = `
-         <ul class="navigation-list">
-         <li class="navigation-item"><a href="#" class="nav-link nav-tour">Tour</a></li>
-         <li class="navigation-item"><a href="#" class="nav-link nav-help">Help</a></li>
-         <li class="navigation-item"><a href="#" class="nav-link nav-log-in">Log in</a></li>
-         <li class="navigation-item"><a href="#" class="nav-link nav-sign-up">Sign Up for free</a></li>
-       </ul>`;
- 
-     navigation.innerHTML = html; */
 
     return navigation;
 
