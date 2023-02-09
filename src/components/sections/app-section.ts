@@ -3,23 +3,16 @@ import { createEl } from "../templates/functions";
 
 class AppSection extends Component {
     menu: HTMLElement;
-// taskBord: HTMLElement;
-// listBord: HTMLElement;
-
 
     constructor(tagName: string, className: string) {
         super(tagName, className);
         this.menu = document.createElement('div');
         this.menu.classList.add('start__menu', 'menu');
-        
-        // this.listBord=document.createElement('div');
-        // this.listBord.classList.add('list-bord');
-      }
-
+    }
 
     makeMenu() {
-        const headerMenu = document.createElement('div');
-        headerMenu.className = 'header-menu';
+    const headerMenu = document.createElement('div');
+    headerMenu.className = 'header-menu';
 
     const logo = document.createElement('div');
     logo.className = 'header_logo';
@@ -29,8 +22,8 @@ class AppSection extends Component {
         
     const x='Входящие';
     const y ='Списки';
-const arrNames = ['Все задачи', 'Сегодня', 'Завтра', 'Неделя'];
-const arrList = ['Личное', 'Работа'];
+    const arrNames = ['Все задачи', 'Сегодня', 'Завтра', 'Неделя'];
+    const arrList = ['Личное', 'Работа'];
   
     this.menu.append(this.renderMenu(x,arrNames))
     this.menu.append(this.renderMenu(y,arrList))
@@ -42,18 +35,28 @@ const arrList = ['Личное', 'Работа'];
 renderMenu(x:string, arrNames:Array<string>) {
     const headerMenu = document.createElement('div');
     headerMenu.className = 'header-in-menu';
-    headerMenu.innerHTML=x;
-
+    const headerMenuButtonCont = document.createElement('div');
+    headerMenuButtonCont.className = 'header-menu-button-cont';
+    const headerMenuButton = document.createElement('div');
+    headerMenuButton.className = 'header-menu-button';
+    const headerMenuButtonTitle = document.createElement('div');
+    headerMenuButtonTitle.className = 'header-menu-button-title';
+    headerMenuButtonTitle.innerHTML=x;
+    headerMenuButtonCont.append(headerMenuButton,headerMenuButtonTitle)
     const inMenuList = document.createElement('ul');
-    inMenuList.className = 'in-menu-list';
-
+    inMenuList.className = 'in-menu-list show';
+    headerMenuButton.onclick=function w() {
+        inMenuList.classList.toggle("show");
+        headerMenu.classList.toggle("show-menu");
+        headerMenuButton.classList.toggle("show-button");
+}
     arrNames.forEach((name) => {
         const liElement = document.createElement('li');
       liElement.className = 'menu-item';
       liElement.textContent = name;
       inMenuList.append(liElement);
     })
-    headerMenu.append(inMenuList)
+    headerMenu.append(headerMenuButtonCont,inMenuList)
     return headerMenu;
   }
 
@@ -61,11 +64,11 @@ renderMenu(x:string, arrNames:Array<string>) {
     const taskBord = document.createElement('div');
     taskBord.className = 'task-bord';
 
-const taskBordHeder=document.createElement('div');
-taskBordHeder.classList.add('header-task-bord');
+    const taskBordHeder=document.createElement('div');
+    taskBordHeder.classList.add('header-task-bord');
 
-const taskBordButton=document.createElement('div');
-taskBordButton.classList.add('button-task-bord');
+    const taskBordButton=document.createElement('div');
+    taskBordButton.classList.add('button-task-bord');
     const taskDo = document.createElement('button');
     taskDo.className = 'button-task';
     taskDo.textContent='Незавершенные'
@@ -78,18 +81,29 @@ taskBordButton.classList.add('button-task-bord');
     const taskAddContainer=document.createElement('div');
     taskAddContainer.classList.add('task-add-container');
 
-const taskAddInput =document.createElement('input');
-taskAddInput.classList.add('task-add-input');
-taskAddInput.placeholder='Добавить задачу'
-const taskAddButton = document.createElement('button');
-taskAddButton.className = 'task-add-button';
-taskAddButton.textContent='Добавить';
-taskAddContainer.append(taskAddInput,taskAddButton);
+    const taskAddInput =document.createElement('input');
+    taskAddInput.classList.add('task-add-input');
+    taskAddInput.placeholder='Добавить задачу';
+    const taskAddButton = document.createElement('button');
+    taskAddButton.className = 'task-add-button';
+        
+    taskAddButton.textContent='Добавить';
+    taskAddContainer.append(taskAddInput,taskAddButton);
 
     taskBordHeder.append(taskBordButton,taskAddContainer);
+     
+const taskBordBody=document.createElement('div');
+taskBordBody.classList.add('task-bord-body');
 
-    taskBord.append(taskBordHeder)
+    taskBord.append(taskBordHeder,taskBordBody)
     return taskBord;
+ }
+
+ createTask(task:string){
+    const taskAdd=document.createElement('checkbox');
+    taskAdd.className = 'task-add';
+    taskAdd.textContent=task;
+return taskAdd;
  }
 
  makeInfoBord(){
@@ -138,3 +152,6 @@ taskAddContainer.append(taskAddInput,taskAddButton);
       }
 }
 export default AppSection;
+
+
+
