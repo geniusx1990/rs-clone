@@ -4,6 +4,8 @@
 @import "styles/app";
 body {
     background: var(--var-back-blue);
+    position: relative;
+    z-index: 100;
 }
 
 .wrapper {
