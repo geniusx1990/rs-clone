@@ -5,7 +5,9 @@ body {
         overflow: hidden;
     }
 }
-
+.main-section {
+  overflow: hidden;
+}
 .btn {
     background-color: var(--var-links);
     color: var(--var-white);
@@ -25,6 +27,7 @@ body {
 
 .start__btn {
     margin-bottom: 1%;
+    z-index: 2;
 }
 
 .main-page {
@@ -41,6 +44,7 @@ body {
 }
 
 .start {
+  position: relative;
     display: flex;
     flex-direction: column;
     padding: 1%;
@@ -53,24 +57,35 @@ body {
 }
 
 .slider {
+  position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 95%;
     width: 95%;
-    overflow: hidden;
+
     &__image {
         flex: 0 1 100%;
         margin-bottom: 1%;
+        transition: transform 0.5s;
+        &:hover {
+          transform: scale(1.3);
+          transition: all 0.5s;
+        }
     }
     &__img {
         width: 100%;
         height: 100%;
-        transition: all 0.7s;
-        animation: 10s infinite alternate slidein;
+        animation: 5s infinite alternate slidein;
+
     }
     &__btns {
+      position: relative;
         text-align: center;
+        z-index: 2;
+    }
+    &__button {
+      cursor: pointer;
     }
 }
 
@@ -99,6 +114,7 @@ body {
     }
 }
 
+
 .footer {
     display: flex;
     justify-content: space-between;
@@ -109,7 +125,7 @@ body {
     height: 50px;
     color: var(--var-links);
     transition: all 0.7s;
-    background: var(--var-back-blue);
+
     &__container {
         width: 100%;
         margin: 10px 25px;
@@ -117,7 +133,6 @@ body {
         justify-content: space-between;
         align-items: center;
         gap: 1%;
-        // background: var(--var-back-blue);
     }
     &__link {
         color: var(--var-links);
