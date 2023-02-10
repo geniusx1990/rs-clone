@@ -83,6 +83,7 @@ renderMenu(x:string, arrNames:Array<string>) {
 
     const taskAddInput =document.createElement('input');
     taskAddInput.classList.add('task-add-input');
+    taskAddInput.setAttribute('type','text');
     taskAddInput.placeholder='Добавить задачу';
     const taskAddButton = document.createElement('button');
     taskAddButton.className = 'task-add-button';
@@ -142,11 +143,61 @@ return taskAdd;
     return infoBord;
  }
 
+makeViewTask(){
+const viewTaskContainer=document.createElement('div');
+viewTaskContainer.classList.add('view-task-container');
+viewTaskContainer.classList.add('hover-task-container');
+const viewTaskContainerClose=document.createElement('div');
+viewTaskContainerClose.classList.add('view-task-container-close');
+viewTaskContainerClose.innerHTML='закрыть'
+const viewTaskContainerCloseX=document.createElement('span');
+viewTaskContainerCloseX.classList.add('view-task-container-closeX');
+viewTaskContainerCloseX.innerHTML='x'
+viewTaskContainerClose.append(viewTaskContainerCloseX);
+const viewTaskTitle=document.createElement('div');
+viewTaskTitle.classList.add('view-task-title');
+const taskPriority=document.createElement('div');
+taskPriority.classList.add('task-priority-container'); 
+const viewTaskTime=document.createElement('div');
+viewTaskTime.classList.add('view-task-time');
+viewTaskTime.innerHTML='срок';
+const viewTaskNoteContainer=document.createElement('div');
+viewTaskNoteContainer.classList.add('task-note-container'); 
+const viewTaskNoteTitle=document.createElement('div');
+viewTaskNoteTitle.classList.add('task-note-title');
+viewTaskNoteTitle.innerHTML='Заметки';
+const viewTaskNoteInputContainer=document.createElement('div');
+viewTaskNoteInputContainer.classList.add('task-note-input-container');
+const viewTaskNoteInputImg=document.createElement('div');
+viewTaskNoteInputImg.classList.add('task-note-input-img');
+const viewTaskNoteInput=document.createElement('input');
+viewTaskNoteInput.classList.add('task-note-input');
+viewTaskNoteInput.setAttribute('type','text');
+viewTaskNoteInput.placeholder='Добавить заметку';
+const viewTaskNoteButtonContainer=document.createElement('div');
+viewTaskNoteButtonContainer.classList.add('task-note-button-container');
+const viewTaskNoteButtonYes=document.createElement('button');
+viewTaskNoteButtonYes.classList.add('task-note-button-yes');
+viewTaskNoteButtonYes.innerHTML='Сохранить'
+const viewTaskNoteButtonNo=document.createElement('button');
+viewTaskNoteButtonNo.classList.add('task-note-button-no');
+viewTaskNoteButtonNo.innerHTML='Отмена'
+const viewTaskNote=document.createElement('div');
+viewTaskNote.classList.add('task-note-view');
+viewTaskNoteButtonContainer.append(viewTaskNoteButtonYes,viewTaskNoteButtonNo)
+viewTaskNoteInputContainer.append(viewTaskNoteInputImg,viewTaskNoteInput)
+viewTaskNoteContainer.append(viewTaskNoteTitle,viewTaskNoteInputContainer,viewTaskNoteButtonContainer)
+viewTaskTitle.append(taskPriority)
+viewTaskContainer.append(viewTaskContainerClose,viewTaskTitle,viewTaskTime,viewTaskNoteContainer,viewTaskNote)
+return viewTaskContainer
+}
+
     render() {
         const menu = this.makeMenu();
     const task =this.makeTaskBord();
-    const list =this.makeInfoBord()
-
+    const list =this.makeInfoBord();
+    const view =this.makeViewTask();
+    list.append(view)
         this.container.append(menu, task, list);
         return this.container;
       }
