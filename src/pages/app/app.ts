@@ -2,10 +2,12 @@ import MainPage from '../../pages/main/main';
 import ApplicationPage from '../../pages/application/application';
 import Page from '../../components/templates/page';
 import Header from '../../components/header/header';
+import RegistrationPage from '../../pages/registration/registration'
 
 const enum PageIds {
   MainPage = 'main-page',
-  ApplicationPage = 'application-page'
+  ApplicationPage = 'application-page',
+  RegistrationPage = 'registration'
 }
 
 class App {
@@ -25,6 +27,8 @@ class App {
       page = new MainPage(idPage);
     } else if (idPage === PageIds.ApplicationPage) {
       page = new ApplicationPage(idPage);
+    } else if (idPage === PageIds.RegistrationPage) {
+      page = new RegistrationPage(idPage);
     }
     if (page) {
       const pageHTML = page.render();
@@ -38,13 +42,13 @@ class App {
       const hash = window.location.hash.slice(1);
       App.renderNewPage(hash);
 
-        })
-        // window.addEventListener('load', () => {
-        //     const hash = window.location.hash.slice(1);
-        //     App.renderNewPage(hash);
+    })
+    // window.addEventListener('load', () => {
+    //     const hash = window.location.hash.slice(1);
+    //     App.renderNewPage(hash);
 
-        // })
-    }
+    // })
+  }
 
   constructor() {
     this.initialPage = new MainPage('main-page');

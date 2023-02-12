@@ -54,16 +54,8 @@ class Header extends Component {
       const aElement = document.createElement(('a'));
       aElement.className = num1;
       aElement.textContent = num2;
-      //aElement.href = '#';
+      aElement.href = '#registration';
 
-      if (index == 1) {
-        console.log(num2)
-
-        aElement.addEventListener('click', () => {
-          const modal = new Modal('div', 'modal');
-          modal.render().style.display = 'block';
-        })
-      }
 
       liElement.append(aElement);
       navigationList.append(liElement);
