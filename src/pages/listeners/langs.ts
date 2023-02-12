@@ -11,21 +11,34 @@ export const listenLangs = () => {
       const img = document.querySelector('.slider__img') as HTMLElement;
 
       if (target.id === 'ru') {
-        img.classList.remove('slider-en');
-        img.classList.add('slider-ru');
-        linkHelp.textContent = "Помощь";
-        linkLog.textContent = 'Вход';
-        linkSignUp.textContent = 'Регистрация';
-        title.textContent = 'Умное приложение для занятых людей!';
-        startBtn.textContent = 'Регистрация';
+        if (img) {
+          img.classList.remove('slider-en');
+          img.classList.add('slider-ru');
+        }
+        if (linkHelp && linkLog && linkSignUp) {
+          linkHelp.textContent = "Помощь";
+          linkLog.textContent = 'Вход';
+          linkSignUp.textContent = 'Регистрация';
+        }
+        if (title && startBtn) {
+          title.textContent = 'Умное приложение для занятых людей!';
+          startBtn.textContent = 'Регистрация';
+        }
+
       } else {
-        img.classList.remove('slider-ru');
-        img.classList.add('slider-en');
-        linkHelp.textContent = "Help";
-        linkLog.textContent = 'Log in';
-        linkSignUp.textContent = 'Sign Up';
-        title.textContent = 'The smart to-do app for busy people!';
-        startBtn.textContent = 'Sign up';
+        if (img) {
+          img.classList.remove('slider-ru');
+          img.classList.add('slider-en');
+        }
+        if (linkHelp && linkLog && linkSignUp) {
+          linkHelp.textContent = "Help";
+          linkLog.textContent = 'Log in';
+          linkSignUp.textContent = 'Sign Up';
+        }
+        if (title && startBtn) {
+          title.textContent = 'The smart to-do app for busy people!';
+          startBtn.textContent = 'Sign up';
+        }
       }
     }
   })

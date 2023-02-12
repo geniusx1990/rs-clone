@@ -39,6 +39,7 @@ a {
     color: var(--var-black);
     font-size: var(--var-font-middle);
     transition: all 0.6s;
+    cursor: pointer;
     &:hover,
     &:active {
         color: var(--var-white);
