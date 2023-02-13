@@ -16,6 +16,12 @@ class HeaderApp extends Component {
     const inputHeder = createEl("input", "header__input", headerWrapper);   
     const logoSetings = createEl("div", "header__setings", headerWrapper);   
     
+    logoSetings.addEventListener('click', (event) => {
+      event.preventDefault();
+      localStorage.removeItem("cookie"); //log out by removing cookie from local storage
+      location.href = "../";
+    })
+
     return headerWrapper;
   }
 

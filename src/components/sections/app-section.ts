@@ -1,5 +1,6 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
+import { getAllUsers } from "../../requests";
 
 class AppSection extends Component {
     menu: HTMLElement;
@@ -95,6 +96,15 @@ const taskButton=this.createTaskButton()
      
 const taskBordBody=document.createElement('div');
 taskBordBody.classList.add('task-bord-body');
+
+    const token = localStorage.getItem("cookie");
+
+    if (token) {
+        console.log(token)
+        const email = 'alex@gmail.com'
+        getAllUsers(email);
+
+        }
 
     taskBord.append(taskBordHeder,taskBordBody)
     return taskBord;

@@ -1,5 +1,6 @@
 import Component from "../templates/component";
-import { apiURL } from '../../type'
+import { apiURL } from '../../type';
+import {userLogIn, userRegister, getAlltasksForOneUser} from '../../requests';
 class SignIn extends Component {
     constructor(tagName: string, className: string) {
         super(tagName, className);
@@ -83,31 +84,7 @@ class SignIn extends Component {
             const email = mailSignIn.value;
             const password = passwordInput.value;
 
-            fetch(`${apiURL}/user/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    const token = data.token;
-
-                    if (data.error) {
-                        alert(`${data.error}`)
-                    }
-                    else if (token) {
-                        localStorage.setItem("cookie", token);
-                        location.href = "../#application-page";
-
-                    }
-
-                })
-                .catch((err) => {
-                    
-                    alert('Error Signing In, please try again.')
-                });
+            userLogIn(email, password); // POST request;
 
         })
 
@@ -194,27 +171,7 @@ class SignIn extends Component {
                 return;
             }
 
-            fetch(`${apiURL}/user/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ name, email, phonenumber, password }),
-            })
-                .then((res) =>
-                    (res.json()))
-                .then((data) => {
-                    if (data.error) {
-                        alert(`${data.error}`)
-                    }
-
-                    else {
-                        alert('Account created. Signing in please.')
-                    }
-                })
-                .catch((err) => {
-                    alert('Error Signing up, try again.')
-                });
+            userRegister(name, email, phonenumber, password); // POST request
 
         })
 
