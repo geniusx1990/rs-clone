@@ -77,7 +77,7 @@ renderMenu(x:string, arrNames:Array<string>) {
     taskDone.textContent='Завершенные'
 
     taskBordButton.append(taskDo, taskDone);
-
+const taskButton=this.createTaskButton()
     const taskAddContainer=document.createElement('div');
     taskAddContainer.classList.add('task-add-container');
 
@@ -91,7 +91,7 @@ renderMenu(x:string, arrNames:Array<string>) {
     taskAddButton.textContent='Добавить';
     taskAddContainer.append(taskAddInput,taskAddButton);
 
-    taskBordHeder.append(taskBordButton,taskAddContainer);
+    taskBordHeder.append(taskBordButton, taskButton,taskAddContainer);
      
 const taskBordBody=document.createElement('div');
 taskBordBody.classList.add('task-bord-body');
@@ -100,11 +100,33 @@ taskBordBody.classList.add('task-bord-body');
     return taskBord;
  }
 
- createTask(task:string){
-    const taskAdd=document.createElement('checkbox');
-    taskAdd.className = 'task-add';
-    taskAdd.textContent=task;
-return taskAdd;
+ createTaskButton(){
+    const taskButton=document.createElement('div');
+    taskButton.classList.add('task-button-container');
+    const taskButtonDoneDelite=document.createElement('div');
+    taskButtonDoneDelite.classList.add('task-button-done-delite');
+    const buttonDone = createEl("button", "button-task-done", taskButtonDoneDelite);
+    const buttonDelite = createEl("button", "button-task-delite", taskButtonDoneDelite);
+    const taskButtonSelect=document.createElement('div');
+    taskButtonSelect.classList.add('task-button-select');
+    const taskButtonSelectPriorety=document.createElement('select');
+    taskButtonSelectPriorety.classList.add('task-select');
+    const SelectPriorety1 = createEl("option", "option-select", taskButtonSelectPriorety, 'Убрать приоритет');
+    const SelectPriorety2 = createEl("option", "option-select", taskButtonSelectPriorety, 'Установить высокий приоритет');
+    const SelectPriorety3 = createEl("option", "option-select", taskButtonSelectPriorety, 'Установить средний приоритет');
+    const SelectPriorety4 = createEl("option", "option-select", taskButtonSelectPriorety, 'Установить низкий приоритет');
+        const taskButtonSelectList=document.createElement('select');
+    taskButtonSelectList.classList.add('task-select');
+    const SelectList1 = createEl("option", "option-select", taskButtonSelectList, 'Личное');
+    const SelectListy2 = createEl("option", "option-select", taskButtonSelectList, 'Работа');
+    const taskButtonSelectTime=document.createElement('select');
+    taskButtonSelectTime.classList.add('task-select');
+    const SelectTime1 = createEl("option", "option-select", taskButtonSelectTime, 'Сегодня');
+    const SelectTime2 = createEl("option", "option-select", taskButtonSelectTime, 'Завтра');
+
+taskButtonSelect.append(taskButtonSelectPriorety,taskButtonSelectList,taskButtonSelectTime)
+    taskButton.append(taskButtonDoneDelite,taskButtonSelect)
+    return taskButton;
  }
 
  makeInfoBord(){
@@ -158,9 +180,14 @@ const viewTaskTitle=document.createElement('div');
 viewTaskTitle.classList.add('view-task-title');
 const taskPriority=document.createElement('div');
 taskPriority.classList.add('task-priority-container'); 
+const viewTaskTitleName=document.createElement('div');
+viewTaskTitleName.classList.add('view-task-title-name');
 const viewTaskTime=document.createElement('div');
 viewTaskTime.classList.add('view-task-time');
 viewTaskTime.innerHTML='срок';
+const viewTaskTimeValue=document.createElement('div');
+viewTaskTimeValue.classList.add('view-task-time-value');
+viewTaskTime.append(viewTaskTimeValue);
 const viewTaskNoteContainer=document.createElement('div');
 viewTaskNoteContainer.classList.add('task-note-container'); 
 const viewTaskNoteTitle=document.createElement('div');
@@ -187,7 +214,7 @@ viewTaskNote.classList.add('task-note-view');
 viewTaskNoteButtonContainer.append(viewTaskNoteButtonYes,viewTaskNoteButtonNo)
 viewTaskNoteInputContainer.append(viewTaskNoteInputImg,viewTaskNoteInput)
 viewTaskNoteContainer.append(viewTaskNoteTitle,viewTaskNoteInputContainer,viewTaskNoteButtonContainer)
-viewTaskTitle.append(taskPriority)
+viewTaskTitle.append(taskPriority,viewTaskTitleName)
 viewTaskContainer.append(viewTaskContainerClose,viewTaskTitle,viewTaskTime,viewTaskNoteContainer,viewTaskNote)
 return viewTaskContainer
 }
