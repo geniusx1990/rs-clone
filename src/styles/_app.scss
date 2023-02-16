@@ -244,6 +244,7 @@
 }
 
 .task-bord-body {
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     border-bottom: 0.5px rgba(128, 128, 128, 0.2392156863) solid;
