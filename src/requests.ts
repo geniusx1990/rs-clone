@@ -17,6 +17,7 @@ export function userLogIn(email: string, password: string) {
             }
             else if (token) {
                 localStorage.setItem("cookie", token);
+                localStorage.setItem("email", email);
                 location.href = "../#application-page";
 
             }
@@ -58,7 +59,7 @@ export function userRegister(name: string, email: string, phonenumber: string, p
 
 const token = localStorage.getItem("cookie");
 
-export function getAllUsers(email: string) {
+export function getUserID(email: string) {
     fetch(`${apiURL}/user/getusers/${email}`, {
         method: "GET",
         headers: {
@@ -71,8 +72,9 @@ export function getAllUsers(email: string) {
     )
         .then((res) => res.json())
         .then((data) => {
-            const user = data.data;
+            const user = data.data[0]['user_id'];
             console.log(user);
+            
         })
         .catch((err) => {
         });
@@ -82,7 +84,7 @@ export function getAllUsers(email: string) {
 
 /// function for adding task into tasks table;
 
-export function addTask(title: string, content: string, completed: string, user_id: string) {
+export function addTaskIntoTable(title: string, content: string, completed: string, user_id: string) {
     fetch(`${apiURL}/user/addtask`, {
         method: "POST",
         headers: {

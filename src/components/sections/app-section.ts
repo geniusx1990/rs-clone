@@ -1,6 +1,6 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
-import { getAllUsers } from "../../requests";
+import { getUserID } from "../../requests";
 
 class AppSection extends Component {
     menu: HTMLElement;
@@ -101,9 +101,8 @@ taskBordBody.classList.add('task-bord-body');
 
     if (token) {
         console.log(token)
-        const email = 'alex@gmail.com'
-        getAllUsers(email);
-
+        const email = JSON.stringify(localStorage.getItem('email'));
+        getUserID(email.slice(1, email.length-1));
         }
 
     taskBord.append(taskBordHeder,taskBordBody)
