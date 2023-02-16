@@ -1,3 +1,4 @@
+import { ITask } from './components/sections/app-section';
 import { apiURL } from './type';
 
 export function userLogIn(email: string, password: string) {
@@ -10,14 +11,13 @@ export function userLogIn(email: string, password: string) {
     })
         .then((res) => res.json())
         .then((data) => {
-            const token = data.token;
+            const user_id = data.user_id;
 
             if (data.error) {
                 alert(`${data.error}`)
             }
-            else if (token) {
-                localStorage.setItem("cookie", token);
-                localStorage.setItem("email", email);
+            else if (user_id) {
+                localStorage.setItem("user_id", data.user_id)
                 location.href = "../#application-page";
 
             }
@@ -57,7 +57,6 @@ export function userRegister(name: string, email: string, phonenumber: string, p
 
 /// get user tasks 'http://localhost:5000/user/getusers/alex@gmail.com'
 
-const token = localStorage.getItem("cookie");
 
 export function getUserID(email: string) {
     fetch(`${apiURL}/user/getusers/${email}`, {
@@ -74,7 +73,7 @@ export function getUserID(email: string) {
         .then((data) => {
             const user = data.data[0]['user_id'];
             console.log(user);
-            
+
         })
         .catch((err) => {
         });
@@ -84,36 +83,21 @@ export function getUserID(email: string) {
 
 /// function for adding task into tasks table;
 
-export function addTaskIntoTable(title: string, content: string, completed: string, user_id: string) {
-    fetch(`${apiURL}/user/addtask`, {
+export function addTaskIntoTable(task: Partial<ITask>): Promise<ITask> {
+    return fetch(`${apiURL}/user/addtask`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, content, completed, user_id }),
-    })
-        .then((res) =>
-            res.json())
-        .then((data) => {
-            if (data.error) {
-                alert(`${data.error}`)
-            }
-
-            else {
-                alert('Task added.')
-            }
-        })
-        .catch((err) => {
-
-            alert('Error adding task, please try again.')
-        });
+        body: JSON.stringify(task),
+    }).then((res) => res.json()) as Promise<ITask>
 }
 
 
 //function fot gettins tasks for user_id http://localhost:5000/user/gettasks?user_id=1
 
-export function getAlltasksForOneUser(user_id: string) {
-    fetch(`${apiURL}/user/gettasks?user_id=${user_id}`, {
+export function getAlltasksForOneUser(user_id: number): Promise<ITask[]> {
+    return fetch(`${apiURL}/user/gettasks?user_id=${user_id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -122,11 +106,17 @@ export function getAlltasksForOneUser(user_id: string) {
 
     }
     )
-        .then((res) => res.json())
-        .then((data) => {
-            const tasks = data;
-            console.log(tasks);
-        })
-        .catch((err) => {
-        });
+        .then((res) => res.json()) as Promise<ITask[]>
+
+}
+
+export function updateTask(task: ITask) {
+    return fetch(`${apiURL}/user/update-task`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+    }).then((res) => res.json()) as Promise<ITask>
+
 }

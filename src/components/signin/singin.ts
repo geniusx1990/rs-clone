@@ -69,17 +69,6 @@ class SignIn extends Component {
         formBox.append(formSignIn)
         signIn.append(quoteBox, formBox)
 
-        
-
-        const token = localStorage.getItem("cookie");
-        if (token) {
-            alert('URA')
-            console.log(localStorage.getItem('email'));
-            getAlltasksForOneUser('1');
-
-        }
-        
-
 
         submitSignIn.addEventListener('click', (event) => {
             event.preventDefault()
