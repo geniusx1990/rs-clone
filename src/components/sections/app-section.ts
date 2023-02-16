@@ -1,6 +1,7 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
 import { getAllUsers } from "../../requests";
+import { makeTask } from "../../pages/listeners/addtask";
 
 class AppSection extends Component {
     menu: HTMLElement;
@@ -96,6 +97,15 @@ const taskButton=this.createTaskButton()
      
 const taskBordBody=document.createElement('div');
 taskBordBody.classList.add('task-bord-body');
+
+
+let taskArray:Array<string>=[];
+
+for (let i=0;i<taskArray.length;i++){
+    let task =makeTask(i, taskArray[i])
+    taskBordBody.append(task)
+}
+
 
     const token = localStorage.getItem("cookie");
 

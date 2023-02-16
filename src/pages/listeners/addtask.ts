@@ -7,22 +7,7 @@ const taskBordBody=document.querySelector('.task-bord-body') as HTMLElement;
        if (target.classList.contains('task-add-button')) {
       if(inputTask.value.length>0){
         count=count+1;
-        const taskPriority=document.createElement('div');
-        taskPriority.classList.add('task-priority-container'); 
-        const taskCont=document.createElement('div');
-        taskCont.classList.add('task-checkbox-container');
-         const task=document.createElement('input') as HTMLInputElement;
-         task.setAttribute("type", "checkbox");
-         task.setAttribute("name", "task");
-         task.classList.add('task-checkbox');
-         task.value = inputTask.value;
-         task.id=`${count}`
-         const taskText = document.createElement("label");
-         taskText.classList.add("task-checkbox-text");
-         taskText.innerHTML = inputTask.value;
-         taskText.setAttribute("for", `${count}`);
-         taskText.id=`${count}`
-         taskCont.append(taskPriority,task,taskText)
+       let taskCont= makeTask(count,inputTask.value)
          taskBordBody.append(taskCont)
          inputTask.value=''
          target.classList.remove('task-add-button-active')
@@ -40,4 +25,24 @@ const taskButton=document.querySelector('.task-add-button') as HTMLElement;
     })
   }
 
-  
+  export function makeTask(count:number,value:string ) {
+
+    const taskCont=document.createElement('div');
+        taskCont.classList.add('task-checkbox-container');
+        const taskPriority=document.createElement('div');
+        taskPriority.classList.add('task-priority-container');
+         const task=document.createElement('input') as HTMLInputElement;
+         task.setAttribute("type", "checkbox");
+         task.setAttribute("name", "task");
+         task.classList.add('task-checkbox');
+         task.value = value;
+         task.id=`${count}`
+         const taskText = document.createElement("label");
+         taskText.classList.add("task-checkbox-text");
+         taskText.innerHTML = value;
+         taskText.setAttribute("for", `${count}`);
+         taskText.id=`${count}`
+         taskCont.append(taskPriority,task,taskText)
+         return taskCont
+
+  }
