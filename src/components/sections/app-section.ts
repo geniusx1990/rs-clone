@@ -2,7 +2,15 @@ import Component from "../templates/component";
 import { createEl } from "../templates/functions";
 import { getUserID } from "../../requests";
 import { makeTask } from "../../pages/listeners/addtask";
+import {getAlltasksForOneUser} from "../../requests"
 
+export interface ArrTasks{
+    id:number;
+    title:string;
+    user_id:number;
+    content:string;
+    completed:string
+}
 class AppSection extends Component {
     menu: HTMLElement;
 
@@ -99,12 +107,13 @@ const taskBordBody=document.createElement('div');
 taskBordBody.classList.add('task-bord-body');
 
 
-let taskArray:Array<string>=[];
+// let id ="1"//тут нужно получать айдишник юзера
+// let taskArray:[ArrTasks]=getAlltasksForOneUser(id);
 
-for (let i=0;i<taskArray.length;i++){
-    let task =makeTask(i, taskArray[i])
-    taskBordBody.append(task)
-}
+// for (let i=0;i<taskArray.length;i++){
+//     let task =makeTask(taskArray[i].id, taskArray[i].title)
+//     taskBordBody.append(task)
+// }
 
 
     const token = localStorage.getItem("cookie");
