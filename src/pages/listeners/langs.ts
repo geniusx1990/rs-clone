@@ -35,7 +35,9 @@ export const listenLangs = () => {
       const img = document.querySelector('.slider__img') as HTMLElement;
       //help page
       const helpTitle = document.querySelector('.help__header') as HTMLElement;
-
+      //application-page
+      const btnTaskOne = document.querySelector('.button-task-one') as HTMLElement;
+      const btnTaskTwo = document.querySelector('.button-task-two') as HTMLElement;
 
       if (target.id === 'ru') {
         lang = 'ru';
@@ -55,6 +57,10 @@ export const listenLangs = () => {
         if (helpTitle) {
           helpTitle.textContent = 'Умное приложение для занятых людей!';
         }
+        if (btnTaskOne && btnTaskTwo) {
+          btnTaskOne.textContent = 'Незавершенные';
+          btnTaskTwo.textContent = 'Завершенные';
+        }
 
       } else {
         lang = 'en';
@@ -73,6 +79,10 @@ export const listenLangs = () => {
         }
         if (helpTitle) {
           helpTitle.textContent = 'The smart to-do app for busy people!';
+        }
+        if (btnTaskOne && btnTaskTwo) {
+          btnTaskOne.textContent = 'Incomplete';
+          btnTaskTwo.textContent = 'Completed';
         }
       }
     }
