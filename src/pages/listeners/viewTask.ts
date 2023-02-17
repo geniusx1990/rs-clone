@@ -1,3 +1,6 @@
+import { ITask } from "../../components/sections/app-section";
+import { getAlltasksForOneUser } from "../../requests";
+
 export const onCheckBoxChangeHandler = () => {
     const allTask = document.querySelectorAll('.task-checkbox');
     console.log(allTask);
@@ -5,57 +8,64 @@ export const onCheckBoxChangeHandler = () => {
         task.addEventListener('change', (event) => {
             const taskCheckBox = (event.target as HTMLInputElement);
             const taskContainer = <HTMLElement>taskCheckBox.parentElement;
-            taskContainer.classList.toggle('task-checkbox-container-active');
-            
-            console.log((event.target as HTMLInputElement).id);
-        })
-    })
+                let task_id = +(event.target as HTMLInputElement).id;
+                let user_id = +(localStorage.getItem('user_id') as string);
+                getAlltasksForOneUser(user_id).then((tasks: ITask[]) => {
+                 for (let i = 0; i < tasks.length; i++) {
+                   const task = tasks [i];
+                     if(task.id===task_id){
+                       const viewTaskTitle = document.querySelector('.view-task-title')as HTMLElement;
+                       viewTaskTitle.innerHTML=task.title
+                   }
+                 }
+             })
+         })
+    })}
     
-   /*  .addEventListener('click', () => {
-        const viewBox = document.querySelector('.view-task-container') as HTMLElement;
-        const checkboxs = document.querySelectorAll('.task-checkbox') as NodeListOf<HTMLInputElement>;
-        const checkboxsCont = document.querySelectorAll('.task-checkbox-container') as NodeListOf<HTMLInputElement>;
-        const target = event?.target as HTMLElement;
-        if (target.classList.contains('task-checkbox-text')) {
-            
-
-
-            checkedNum = +target.id
-            viewBox.classList.remove('hover-task-container');
-            for (let i = 0; i < checkboxs.length; i++) {
-                let checkbox = checkboxs[i];
-                if ((checkedNum - 1) !== i) {
-                    checkboxsCont[i].classList.remove('task-checkbox-container-active')
-                    checkbox.checked = false;
-                } else {
-                    checkboxsCont[i].classList.add('task-checkbox-container-active')
+export const viewTask = () => {
+    let checkedNum=0;
+    window.addEventListener('click', () => {
+       const viewBox=document.querySelector('.view-task-container') as HTMLElement;
+       const checkboxs=document.querySelectorAll('.task-checkbox') as NodeListOf<HTMLInputElement>;
+       const checkboxsCont =document.querySelectorAll('.task-checkbox-container') as NodeListOf<HTMLInputElement>;
+         const target = event?.target as HTMLElement;
+         if (target.classList.contains('task-checkbox-text')) { 
+        viewBox.classList.remove('hover-task-container');
+           
+        for(let i=0; i<checkboxs.length;i++){
+             let checkbox=checkboxs[i];
+             checkboxsCont[i].classList.remove('task-checkbox-container-active');
+             if(checkbox.checked){
+                checkedNum=+checkbox.id
+                checkbox.checked=false
+             }
+             if(checkedNum===+target.id){
+                checkedNum=0
+                viewBox.classList.add('hover-task-container');
+               setTimeout(() => {
+                for(let i=0; i<checkboxs.length;i++){
+                    let checkbox=checkboxs[i];
+                    checkboxsCont[i].classList.remove('task-checkbox-container-active');
+                    checkbox.checked=false;
                 }
-                if (checkbox.checked) {
-                    viewBox.classList.add('hover-task-container')
-                    checkboxsCont[i].classList.remove('task-checkbox-container-active')
-                }
+               }, 0);
+             }
+
+        }    
+        const taskContainer = <HTMLElement>target.parentElement;
+             taskContainer.classList.add('task-checkbox-container-active');
+
             }
-        }
         if (target.classList.contains('view-task-container-close')) {
             viewBox.classList.add('hover-task-container');
-            for (let i = 0; i < checkboxs.length; i++) {
-                let checkbox = checkboxs[i];
+            for(let i=0; i<checkboxs.length;i++){
+                let checkbox=checkboxs[i];
                 checkboxsCont[i].classList.remove('task-checkbox-container-active');
-                checkbox.checked = false;
+                checkbox.checked=false;
 
             }
         }
-    }) */
-}
-
-
-function checked(checkboxs: NodeListOf<HTMLInputElement>): number {
-    let check = 0;
-    for (let i = 0; i < checkboxs.length; i++) {
-        let checkbox = checkboxs[i];
-        if (checkbox.checked === true) {
-            check++;
-        }
+     })
     }
-    return check
-}
+
+   
