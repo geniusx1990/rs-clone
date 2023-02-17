@@ -2,7 +2,7 @@ import "./index.scss";
 import { listenSlider } from "./pages/listeners/slider";
 import { listenLangs } from "./pages/listeners/langs";
 import { onCheckBoxChangeHandler } from "./pages/listeners/viewTask";
-
+import { closeModal } from './pages/listeners/closeReg';
 import App from './pages/app/app';
 
 const app = new App();
@@ -11,3 +11,4 @@ listenSlider();
 listenLangs();
 /* viewTask()
  */
+closeModal();
