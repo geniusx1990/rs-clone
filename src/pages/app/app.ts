@@ -3,11 +3,14 @@ import ApplicationPage from '../../pages/application/application';
 import Page from '../../components/templates/page';
 import Header from '../../components/header/header';
 import RegistrationPage from '../../pages/registration/registration'
+import HelpPage from '../../pages/help/help';
+import { setCheckbox } from '../listeners/langs';
 
 const enum PageIds {
   MainPage = 'main-page',
   ApplicationPage = 'application-page',
-  RegistrationPage = 'registration'
+  RegistrationPage = 'registration',
+  HelpPage = 'help',
 }
 
 class App {
@@ -29,12 +32,15 @@ class App {
       page = new ApplicationPage(idPage);
     } else if (idPage === PageIds.RegistrationPage) {
       page = new RegistrationPage(idPage);
+    } else if (idPage === PageIds.HelpPage) {
+      page = new HelpPage(idPage);
     }
     if (page) {
       const pageHTML = page.render();
       pageHTML.id = App.defaultPageId;
       App.container.append(pageHTML);
     }
+    setCheckbox();
   }
 
   private enableRouteChange() {

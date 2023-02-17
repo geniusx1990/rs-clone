@@ -14,8 +14,14 @@ class Header extends Component {
 
     const logo = document.createElement('div');
     logo.className = 'header_logo';
+    const link = createEl("a", "header__link", logo) as HTMLLinkElement;
+    link.href = '#start-page';
+
     headerWrapper.append(logo);
-    createEl("div", "header__title", logo, "Remember the milk");
+    const logoTitle = createEl("div", "header__title", logo, "Remember the milk");
+    const linkTwo = createEl("a", "header__link", logoTitle) as HTMLLinkElement;
+    linkTwo.href = '#start-page';
+
     headerWrapper.append(this.renderLangs());
     headerWrapper.append(this.renderLinks());
 
@@ -54,9 +60,13 @@ class Header extends Component {
       const aElement = document.createElement(('a'));
       aElement.className = num1;
       aElement.textContent = num2;
-      aElement.href = '#registration';
 
-
+      if (index === 0) {
+        aElement.href = '#help';
+      }
+      if (index === 1) {
+        aElement.href = '#registration';
+      }
       liElement.append(aElement);
       navigationList.append(liElement);
     })
