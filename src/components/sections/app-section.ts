@@ -11,6 +11,7 @@ export interface ITask {
   content: string;
   completed: string
 }
+
 class AppSection extends Component {
   menu: HTMLElement;
 
@@ -18,8 +19,9 @@ class AppSection extends Component {
     super(tagName, className);
     this.menu = document.createElement('div');
     this.menu.classList.add('start__menu', 'menu');
+    
   }
-
+ 
   makeMenu() {
     const headerMenu = document.createElement('div');
     headerMenu.className = 'header-menu';
@@ -191,14 +193,7 @@ class AppSection extends Component {
         taskBordBody.append(taskContainer);
       })
       onCheckBoxChangeHandler();
-
-    })
-
-
-
-
-
-
+          })
     taskBord.append(taskBordHeder, taskBordBody)
     return taskBord;
   }
@@ -314,6 +309,7 @@ class AppSection extends Component {
     viewTaskNoteButtonNo.innerHTML = 'Отмена'
     const viewTaskNote = document.createElement('div');
     viewTaskNote.classList.add('task-note-view');
+    const taskBordBody = document.querySelector('.task-bord-body') as HTMLElement;
     viewTaskNoteButtonContainer.append(viewTaskNoteButtonYes, viewTaskNoteButtonNo)
     viewTaskNoteInputContainer.append(viewTaskNoteInputImg, viewTaskNoteInput)
     viewTaskNoteContainer.append(viewTaskNoteTitle, viewTaskNoteInputContainer, viewTaskNoteButtonContainer)
