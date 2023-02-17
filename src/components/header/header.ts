@@ -27,7 +27,7 @@ class Header extends Component {
     el.classList.add('header__langs');
 
     const html = `
-    <label class="lang__label lang-label-en" for="en">EN<input type="radio" class="lang__button" id="en" name="langs" checked></label>
+    <label class="lang__label lang-label-en" for="en">EN<input type="radio" class="lang__button" id="en" name="langs"></label>
     <label  class="lang__label lang-label-ru"for="ru">RU<input type="radio"  class="lang__button"id="ru" name="langs"></label>
 
     `;

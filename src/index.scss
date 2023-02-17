@@ -2,6 +2,7 @@
 @import "styles/start";
 @import "styles/header";
 @import "styles/app";
+@import "styles/reg_image";
 body {
     background: var(--var-back-blue);
     position: relative;
@@ -26,3 +27,4 @@ body {
     justify-content: space-between;
     gap: 1%;
 }
+

@@ -1,4 +1,17 @@
+export let lang = 'en';
+
+
 export const listenLangs = () => {
+
+  const langRu = document.getElementById('ru') as HTMLInputElement;
+  const langEn = document.getElementById('en') as HTMLInputElement;
+
+  if (lang === 'ru') {
+    langRu.checked = true;
+  } else if (lang === 'en') {
+    langEn.checked = true;
+  }
+
   window.addEventListener('change', () => {
     const target = event?.target as HTMLInputElement;
     if (target.classList.contains('lang__button')) {
@@ -11,6 +24,7 @@ export const listenLangs = () => {
       const img = document.querySelector('.slider__img') as HTMLElement;
 
       if (target.id === 'ru') {
+        lang = 'ru';
         if (img) {
           img.classList.remove('slider-en');
           img.classList.add('slider-ru');
@@ -26,6 +40,7 @@ export const listenLangs = () => {
         }
 
       } else {
+        lang = 'en';
         if (img) {
           img.classList.remove('slider-ru');
           img.classList.add('slider-en');
