@@ -120,3 +120,14 @@ export function updateTask(task: ITask) {
     }).then((res) => res.json()) as Promise<ITask>
 
 }
+
+export function deleteTask(id: number) {
+    return fetch(`${apiURL}/user/deletetask/${id}`, {
+        method: "DELETE",
+/*         headers: {
+            "Content-Type": "application/json",
+        },
+ */        body: JSON.stringify(id),
+    }).then((res) => res.json())
+
+}

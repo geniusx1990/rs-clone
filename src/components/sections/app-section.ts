@@ -1,7 +1,7 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
 import { getUserID } from "../../requests";
-import { addTaskIntoTable, getAlltasksForOneUser } from '../../requests'
+import { addTaskIntoTable, getAlltasksForOneUser, deleteTask } from '../../requests'
 import { onCheckBoxChangeHandler } from "../../pages/listeners/viewTask";
 import { lang } from "../../pages/listeners/langs";
 export interface ITask {
@@ -19,9 +19,9 @@ class AppSection extends Component {
     super(tagName, className);
     this.menu = document.createElement('div');
     this.menu.classList.add('start__menu', 'menu');
-    
+
   }
- 
+
   makeMenu() {
     const headerMenu = document.createElement('div');
     headerMenu.className = 'header-menu';
@@ -144,6 +144,7 @@ class AppSection extends Component {
             this.appendTask(data);
             taskAddInput.value = ''
             taskAddButton.classList.remove('task-add-button-active')
+            onCheckBoxChangeHandler();
           })
       }
     })
@@ -193,7 +194,7 @@ class AppSection extends Component {
         taskBordBody.append(taskContainer);
       })
       onCheckBoxChangeHandler();
-          })
+    })
     taskBord.append(taskBordHeder, taskBordBody)
     return taskBord;
   }
@@ -204,7 +205,31 @@ class AppSection extends Component {
     const taskButtonDoneDelite = document.createElement('div');
     taskButtonDoneDelite.classList.add('task-button-done-delite');
     const buttonDone = createEl("button", "button-task-done", taskButtonDoneDelite);
+
+    /*     buttonDone.addEventListener('click', () => {
+          console.log('aaa')
+        })
+     */
     const buttonDelite = createEl("button", "button-task-delite", taskButtonDoneDelite);
+
+
+    buttonDelite.addEventListener('click', () => {
+      let task_id = localStorage.getItem('task_id');
+      if (task_id !== null) {
+        deleteTask(Number(task_id))
+        const containerClose = document.querySelector('.view-task-container');
+        containerClose?.classList.add('hover-task-container')
+        const allTask = document.querySelectorAll('.task-checkbox');
+        allTask.forEach(task => {
+          if (task.id === task_id) {
+            task.parentElement?.remove();
+          }
+        })
+
+      }
+    })
+
+
     const taskButtonSelect = document.createElement('div');
     taskButtonSelect.classList.add('task-button-select');
     const taskButtonSelectPriorety = document.createElement('select');
