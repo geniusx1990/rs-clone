@@ -110,7 +110,7 @@ export function getAlltasksForOneUser(user_id: number): Promise<ITask[]> {
 
 }
 
-export function updateTask(task: ITask) {
+/* export function updateTask(task: ITask) {
     return fetch(`${apiURL}/user/update-task`, {
         method: "POST",
         headers: {
@@ -120,6 +120,21 @@ export function updateTask(task: ITask) {
     }).then((res) => res.json()) as Promise<ITask>
 
 }
+ */
+
+
+export function updateTask(task: Partial<ITask>): Promise<ITask>{
+    return fetch(`${apiURL}/user/completed`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+    }).then((res) => res.json()) as Promise<ITask>
+
+}
+
+
 
 export function deleteTask(id: number) {
     return fetch(`${apiURL}/user/deletetask/${id}`, {

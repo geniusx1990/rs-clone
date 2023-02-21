@@ -1,7 +1,7 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
 import { getUserID } from "../../requests";
-import { addTaskIntoTable, getAlltasksForOneUser, deleteTask } from '../../requests'
+import { addTaskIntoTable, getAlltasksForOneUser, deleteTask, updateTask } from '../../requests'
 import { onCheckBoxChangeHandler } from "../../pages/listeners/viewTask";
 import { lang } from "../../pages/listeners/langs";
 export interface ITask {
@@ -137,7 +137,7 @@ class AppSection extends Component {
           title: taskAddInput.value,
           user_id: user_id,
           content: 'content',
-          completed: 'completed'
+          completed: 'not completed'
         }
         addTaskIntoTable(task)
           .then((data: ITask) => {
@@ -187,6 +187,10 @@ class AppSection extends Component {
         taskCheckBox.value = task.title;
         taskCheckBox.id = `${task.id}`
         taskText.classList.add("task-checkbox-text");
+        if (task.completed === 'completed') {
+          taskText.classList.add('task-done');
+        }
+
         taskText.innerHTML = task.title;
         taskText.setAttribute("for", `${task.id}`);
         taskText.id = `${task.id}`
@@ -206,10 +210,28 @@ class AppSection extends Component {
     taskButtonDoneDelite.classList.add('task-button-done-delite');
     const buttonDone = createEl("button", "button-task-done", taskButtonDoneDelite);
 
-    /*     buttonDone.addEventListener('click', () => {
-          console.log('aaa')
+    buttonDone.addEventListener('click', () => {
+      let task_id = localStorage.getItem('task_id');
+
+      if (task_id !== null) {
+        let task: Partial<ITask> = {
+          id: Number(task_id),
+          completed: 'completed'
+        }
+        updateTask(task)
+        const allTask = document.querySelectorAll('.task-checkbox-text');
+        allTask.forEach(task => {
+          if (task.id === task_id) {
+            console.log(task)
+            task.classList.add('task-done')
+          }
         })
-     */
+
+        console.log(task);
+
+      }
+    })
+
     const buttonDelite = createEl("button", "button-task-delite", taskButtonDoneDelite);
 
 
