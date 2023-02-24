@@ -7,6 +7,7 @@ import HelpPage from '../../pages/help/help';
 import { setCheckbox } from '../listeners/langs';
 
 const enum PageIds {
+  EmptyPage='',
   MainPage = 'main-page',
   ApplicationPage = 'application-page',
   RegistrationPage = 'registration',
@@ -34,6 +35,9 @@ class App {
       page = new RegistrationPage(idPage);
     } else if (idPage === PageIds.HelpPage) {
       page = new HelpPage(idPage);
+    }else if (idPage === PageIds.EmptyPage) {
+      // page = new MainPage(idPage);
+      location.href = "../#main-page";
     }
     if (page) {
       const pageHTML = page.render();
@@ -49,11 +53,6 @@ class App {
       App.renderNewPage(hash);
 
     })
-    // window.addEventListener('load', () => {
-    //   const hash = window.location.hash.slice(1);
-    //   App.renderNewPage(hash);
-
-    // })
   }
 
   constructor() {
@@ -63,7 +62,8 @@ class App {
 
   start() {
     //  App.container.append(this.header.render());
-    App.renderNewPage('main-page');
+    const hash = window.location.hash.slice(1);
+    App.renderNewPage(hash);
     this.enableRouteChange();
 
   }
