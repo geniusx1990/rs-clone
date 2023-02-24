@@ -36,7 +36,7 @@ class HeaderApp extends Component {
       event.preventDefault();
       localStorage.removeItem("cookie"); //log out by removing cookie from local storage
 
-      location.href = "../";
+      location.href = "../#main-page";
       console.log(localStorage.getItem('email'));
 
     })

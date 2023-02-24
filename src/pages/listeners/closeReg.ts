@@ -7,7 +7,8 @@ export const closeModal = () => {
 
     if (target.closest('.registration') && !target.closest('.container')) {
 
-      App.renderNewPage('main-page');
+      location.href = "../#main-page"
+      // App.renderNewPage('main-page');
 
     }
 
