@@ -50,7 +50,7 @@ class Header extends Component {
     navigationList.className = 'navigation-list';
 
     const arrClasses = ['nav-link nav-main', 'nav-link nav-help', 'nav-link nav-log-in', 'nav-link nav-sign-up'];
-    let arrNames = ['Help', 'Log in', 'Sign Up for free'];
+    let arrNames = ['Main', 'Help', 'Log in', 'Sign Up for free'];
 
     if (lang === 'en') {
       arrNames = ['Main', 'Help', 'Log in', 'Sign Up for free'];
