@@ -5,9 +5,10 @@ import Header from '../../components/header/header';
 import RegistrationPage from '../../pages/registration/registration'
 import HelpPage from '../../pages/help/help';
 import { setCheckbox } from '../listeners/langs';
+import { activePage } from '../../components/templates/functions';
 
 const enum PageIds {
-  EmptyPage='',
+  EmptyPage = '',
   MainPage = 'main-page',
   ApplicationPage = 'application-page',
   RegistrationPage = 'registration',
@@ -35,7 +36,7 @@ class App {
       page = new RegistrationPage(idPage);
     } else if (idPage === PageIds.HelpPage) {
       page = new HelpPage(idPage);
-    }else if (idPage === PageIds.EmptyPage) {
+    } else if (idPage === PageIds.EmptyPage) {
       // page = new MainPage(idPage);
       location.href = "../#main-page";
     }
@@ -43,8 +44,10 @@ class App {
       const pageHTML = page.render();
       pageHTML.id = App.defaultPageId;
       App.container.append(pageHTML);
+
     }
     setCheckbox();
+    activePage(idPage);
   }
 
   private enableRouteChange() {
