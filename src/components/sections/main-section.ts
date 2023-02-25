@@ -1,5 +1,6 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
+import { lang } from "../../pages/listeners/langs";
 
 export class MainSection extends Component {
   slider: HTMLElement;
@@ -12,15 +13,16 @@ export class MainSection extends Component {
     const header = document.createElement('div');
 
     header.className = 'start';
-    createEl('h1', 'start__header', header, 'The smart to-do app for busy people!');
-    createEl('button', 'btn start__btn', header, 'Sign up');
+    (lang === 'en') ? createEl('h1', 'start__header', header, 'The smart to-do app for busy people!') :
+      createEl('h1', 'start__header', header, 'Умное приложение для занятых людей!');
+
+    (lang === 'en') ? createEl('button', 'btn start__btn', header, 'Sign up') :
+      createEl('button', 'btn start__btn', header, 'Регистрация');
     this.slider.innerHTML = this.makeSliderBtn();
     header.append(this.slider);
     return header;
   }
-  static showSlideOne() {
-    console.log("slideOne")
-  }
+
   makeSliderBtn() {
     return `
     <div class="slider__image">

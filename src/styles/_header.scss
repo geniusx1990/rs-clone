@@ -28,7 +28,7 @@
     justify-content: space-around;
     list-style-type: none;
     gap: 2%;
-    @media (max-width: 520px) {
+    @media (max-width: 620px) {
         flex-wrap: wrap;
         justify-content: space-between;
     }

@@ -1,6 +1,7 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
-import Modal from '../../components/modal/modal'
+import Modal from '../../components/modal/modal';
+import { lang } from "../../pages/listeners/langs";
 
 class Header extends Component {
   constructor(tagName: string, className: string) {
@@ -15,12 +16,12 @@ class Header extends Component {
     const logo = document.createElement('div');
     logo.className = 'header_logo';
     const link = createEl("a", "header__link", logo) as HTMLLinkElement;
-    link.href = '#start-page';
+    link.href = '#main-page';
 
     headerWrapper.append(logo);
     const logoTitle = createEl("div", "header__title", logo, "Remember the milk");
     const linkTwo = createEl("a", "header__link", logoTitle) as HTMLLinkElement;
-    linkTwo.href = '#start-page';
+    linkTwo.href = '#main-page';
 
     headerWrapper.append(this.renderLangs());
     headerWrapper.append(this.renderLinks());
@@ -48,8 +49,15 @@ class Header extends Component {
     const navigationList = document.createElement('ul');
     navigationList.className = 'navigation-list';
 
-    const arrClasses = ['nav-link nav-help', 'nav-link nav-log-in', 'nav-link nav-sign-up'];
-    const arrNames = ['Help', 'Log in', 'Sign Up for free'];
+    const arrClasses = ['nav-link nav-main', 'nav-link nav-help', 'nav-link nav-log-in', 'nav-link nav-sign-up'];
+    let arrNames = ['Help', 'Log in', 'Sign Up for free'];
+
+    if (lang === 'en') {
+      arrNames = ['Main', 'Help', 'Log in', 'Sign Up for free'];
+    } else if (lang === 'ru') {
+      arrNames = ['Главная', 'Помощь', 'Вход', 'Регистрация'];
+    }
+
 
     arrClasses.forEach((num1, index) => {
       const num2 = arrNames[index];
@@ -62,9 +70,12 @@ class Header extends Component {
       aElement.textContent = num2;
 
       if (index === 0) {
-        aElement.href = '#help';
+        aElement.href = '#main-page';
       }
       if (index === 1) {
+        aElement.href = '#help';
+      }
+      if (index === 2) {
         aElement.href = '#registration';
       }
       liElement.append(aElement);
