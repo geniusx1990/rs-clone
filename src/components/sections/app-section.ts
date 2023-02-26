@@ -115,7 +115,6 @@ class AppSection extends Component {
 
   }
 
-
   makeTaskBord() {
     const taskBord = document.createElement('div');
     taskBord.className = 'task-bord';
