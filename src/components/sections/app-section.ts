@@ -31,20 +31,32 @@ class AppSection extends Component {
     headerMenu.append(logo);
 
     const logoTitle = createEl("div", "header__title", logo, "Remember the milk");
+    let x = 'Входящие';
+    let y = 'Списки';
+    let arrNames = ['Все задачи', 'Сегодня', 'Завтра', 'Неделя'];
+    let arrList = ['Личное', 'Работа'];
 
-    const x = 'Входящие';
-    const y = 'Списки';
-    const arrNames = ['Все задачи', 'Сегодня', 'Завтра', 'Неделя'];
-    const arrList = ['Личное', 'Работа'];
+    if (lang === 'ru') {
+      x = 'Входящие';
+      y = 'Списки';
+      arrNames = ['Все задачи', 'Сегодня', 'Завтра', 'Неделя'];
+      arrList = ['Личное', 'Работа'];
+    } else if (lang === 'en') {
+      x = 'Inbox';
+      y = 'Lists';
+      arrNames = ['All tasks', 'Today', 'Tomorrow', 'This week'];
+      arrList = ['Personal', 'Work'];
+    }
 
-    this.menu.append(this.renderMenu(x, arrNames))
-    this.menu.append(this.renderMenu(y, arrList))
+
+    this.menu.append(this.renderMenu(x, arrNames, 'menu-item-inbox', 'inbox-all'))
+    this.menu.append(this.renderMenu(y, arrList, 'menu-item-list', 'inbox-list'))
 
     headerMenu.append(this.menu);
     return headerMenu;
   }
 
-  renderMenu(x: string, arrNames: Array<string>) {
+  renderMenu(x: string, arrNames: Array<string>, nameEl: string, title: string) {
     const headerMenu = document.createElement('div');
     headerMenu.className = 'header-in-menu';
     const headerMenuButtonCont = document.createElement('div');
@@ -53,6 +65,7 @@ class AppSection extends Component {
     headerMenuButton.className = 'header-menu-button';
     const headerMenuButtonTitle = document.createElement('div');
     headerMenuButtonTitle.className = 'header-menu-button-title';
+    headerMenuButtonTitle.classList.add(title);
     headerMenuButtonTitle.innerHTML = x;
     headerMenuButtonCont.append(headerMenuButton, headerMenuButtonTitle)
     const inMenuList = document.createElement('ul');
@@ -64,13 +77,14 @@ class AppSection extends Component {
     }
     arrNames.forEach((name) => {
       const liElement = document.createElement('li');
-      liElement.className = 'menu-item';
+      liElement.className = nameEl;
       liElement.textContent = name;
       inMenuList.append(liElement);
     })
     headerMenu.append(headerMenuButtonCont, inMenuList)
     return headerMenu;
   }
+
 
   appendTask(task: ITask) {
     const taskBordBody = document.querySelector('.task-bord-body') as HTMLElement;
@@ -121,11 +135,15 @@ class AppSection extends Component {
     taskAddContainer.classList.add('task-add-container');
 
     const taskAddInput = document.createElement('input');
-    taskAddInput.classList.add('task-add-input');
+    taskAddInput.classList.add('task-add-input', 'task-add-input-lang');
     taskAddInput.setAttribute('type', 'text');
-    taskAddInput.placeholder = 'Добавить задачу';
+    (lang === 'ru') ? taskAddInput.placeholder = 'Добавить задачу' :
+      taskAddInput.placeholder = 'Add a task';
     const taskAddButton = document.createElement('button');
-    taskAddButton.className = 'task-add-button';
+    taskAddButton.classList.add('task-add-button', 'task-add-button-lang');
+    (lang === 'ru') ? taskAddButton.textContent = 'Добавить' :
+      taskAddButton.textContent = 'Add';
+
     /////
     let user_id = +(localStorage.getItem('user_id') as string);
 
@@ -162,7 +180,7 @@ class AppSection extends Component {
     ////
 
 
-    taskAddButton.textContent = 'Добавить';
+
     taskAddContainer.append(taskAddInput, taskAddButton);
 
     taskBordHeder.append(taskBordButton, taskButton, taskAddContainer);
@@ -256,19 +274,36 @@ class AppSection extends Component {
     taskButtonSelect.classList.add('task-button-select');
     const taskButtonSelectPriorety = document.createElement('select');
     taskButtonSelectPriorety.classList.add('task-select');
-    const SelectPriorety1 = createEl("option", "option-select", taskButtonSelectPriorety, 'Убрать приоритет');
-    const SelectPriorety2 = createEl("option", "option-select", taskButtonSelectPriorety, 'Установить высокий приоритет');
-    const SelectPriorety3 = createEl("option", "option-select", taskButtonSelectPriorety, 'Установить средний приоритет');
-    const SelectPriorety4 = createEl("option", "option-select", taskButtonSelectPriorety, 'Установить низкий приоритет');
+    if (lang === 'ru') {
+      const SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Убрать приоритет');
+      const SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Установить высокий приоритет');
+      const SelectPriorety3 = createEl("option", "option-select option-select-middle", taskButtonSelectPriorety, 'Установить средний приоритет');
+      const SelectPriorety4 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Установить низкий приоритет');
+    } else if (lang === 'en') {
+      const SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Remove priority');
+      const SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Set high priority');
+      const SelectPriorety3 = createEl("option", "option-select option-select-middle", taskButtonSelectPriorety, 'Set medium priority');
+      const SelectPriorety4 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Set low priority');
+    }
     const taskButtonSelectList = document.createElement('select');
     taskButtonSelectList.classList.add('task-select');
-    const SelectList1 = createEl("option", "option-select", taskButtonSelectList, 'Личное');
-    const SelectListy2 = createEl("option", "option-select", taskButtonSelectList, 'Работа');
+    if (lang === 'ru') {
+      const SelectList1 = createEl("option", "option-select option-select-personal", taskButtonSelectList, 'Личное');
+      const SelectListy2 = createEl("option", "option-select option-select-work", taskButtonSelectList, 'Работа');
+    } else if (lang === 'en') {
+      const SelectList1 = createEl("option", "option-select option-select-personal", taskButtonSelectList, 'Personal');
+      const SelectListy2 = createEl("option", "option-select option-select-work", taskButtonSelectList, 'Work');
+    }
+
     const taskButtonSelectTime = document.createElement('select');
     taskButtonSelectTime.classList.add('task-select');
-    const SelectTime1 = createEl("option", "option-select", taskButtonSelectTime, 'Сегодня');
-    const SelectTime2 = createEl("option", "option-select", taskButtonSelectTime, 'Завтра');
-
+    if (lang === 'ru') {
+      const SelectTime1 = createEl("option", "option-select option-select-today", taskButtonSelectTime, 'Сегодня');
+      const SelectTime2 = createEl("option", "option-select option-select-tomorrow", taskButtonSelectTime, 'Завтра');
+    } else if (lang === 'en') {
+      const SelectTime1 = createEl("option", "option-select option-select-today", taskButtonSelectTime, 'Today');
+      const SelectTime2 = createEl("option", "option-select option-select-tomorrow", taskButtonSelectTime, 'Tomorrow');
+    }
     taskButtonSelect.append(taskButtonSelectPriorety, taskButtonSelectList, taskButtonSelectTime)
     taskButton.append(taskButtonDoneDelite, taskButtonSelect)
     return taskButton;
@@ -279,8 +314,9 @@ class AppSection extends Component {
     infoBord.className = 'info-bord';
 
     const titleTask = document.createElement('div');
-    titleTask.classList.add('task-title');
-    titleTask.innerHTML = 'Входящие';
+    titleTask.classList.add('task-title', 'task-title-lang');
+    (lang === 'ru') ? titleTask.innerHTML = 'Входящие' :
+      titleTask.innerHTML = 'Inbox';
 
     const titleTaskList = document.createElement('div');
     titleTaskList.classList.add('task-title-list');
@@ -291,8 +327,10 @@ class AppSection extends Component {
     titleTaskDoTitle.classList.add('task-title-do');
     titleTaskDoTitle.innerHTML = '0'
     const titleTaskDoCount = document.createElement('div');
-    titleTaskDoCount.classList.add('task-count-do');
-    titleTaskDoCount.innerHTML = 'задач(и)'
+    titleTaskDoCount.classList.add('task-count-do', 'task-count-do-task');
+    (lang === 'ru') ? titleTaskDoCount.innerHTML = 'задач(и)' :
+      titleTaskDoCount.innerHTML = 'tasks';
+
     titleTaskDo.append(titleTaskDoTitle, titleTaskDoCount);
 
     const titleTaskDone = document.createElement('div');
@@ -301,8 +339,9 @@ class AppSection extends Component {
     titleTaskDoneTitle.classList.add('task-title-do');
     titleTaskDoneTitle.innerHTML = '0'
     const titleTaskDoneCount = document.createElement('div');
-    titleTaskDoneCount.classList.add('task-count-do');
-    titleTaskDoneCount.innerHTML = 'завершено'
+    titleTaskDoneCount.classList.add('task-count-do', 'task-completed');
+    (lang === 'ru') ? titleTaskDoneCount.innerHTML = 'завершено' :
+      titleTaskDoneCount.innerHTML = 'completed';
     titleTaskDone.append(titleTaskDoneTitle, titleTaskDoneCount);
 
     titleTaskList.append(titleTaskDo, titleTaskDone);
@@ -316,7 +355,8 @@ class AppSection extends Component {
     viewTaskContainer.classList.add('hover-task-container');
     const viewTaskContainerClose = document.createElement('div');
     viewTaskContainerClose.classList.add('view-task-container-close');
-    viewTaskContainerClose.innerHTML = 'закрыть'
+    (lang === 'ru') ? viewTaskContainerClose.textContent = 'закрыть' :
+      viewTaskContainerClose.textContent = 'close';
     const viewTaskContainerCloseX = document.createElement('span');
     viewTaskContainerCloseX.classList.add('view-task-container-closeX');
     viewTaskContainerCloseX.innerHTML = 'x'
@@ -328,32 +368,37 @@ class AppSection extends Component {
     const viewTaskTitleName = document.createElement('div');
     viewTaskTitleName.classList.add('view-task-title-name');
     const viewTaskTime = document.createElement('div');
-    viewTaskTime.classList.add('view-task-time');
-    viewTaskTime.innerHTML = 'срок';
+    viewTaskTime.classList.add('view-task-time', 'view-task-time-lang');
+    (lang === 'ru') ? viewTaskTime.innerHTML = 'срок' :
+      viewTaskTime.innerHTML = 'term';
     const viewTaskTimeValue = document.createElement('div');
     viewTaskTimeValue.classList.add('view-task-time-value');
     viewTaskTime.append(viewTaskTimeValue);
     const viewTaskNoteContainer = document.createElement('div');
     viewTaskNoteContainer.classList.add('task-note-container');
     const viewTaskNoteTitle = document.createElement('div');
-    viewTaskNoteTitle.classList.add('task-note-title');
-    viewTaskNoteTitle.innerHTML = 'Заметки';
+    viewTaskNoteTitle.classList.add('task-note-title', 'task-note-title-lang');
+    (lang === 'ru') ? viewTaskNoteTitle.innerHTML = 'Заметки' :
+      viewTaskNoteTitle.innerHTML = 'Notes';
     const viewTaskNoteInputContainer = document.createElement('div');
     viewTaskNoteInputContainer.classList.add('task-note-input-container');
     const viewTaskNoteInputImg = document.createElement('div');
     viewTaskNoteInputImg.classList.add('task-note-input-img');
     const viewTaskNoteInput = document.createElement('input');
-    viewTaskNoteInput.classList.add('task-note-input');
+    viewTaskNoteInput.classList.add('task-note-input', 'task-note-input-lang');
     viewTaskNoteInput.setAttribute('type', 'text');
-    viewTaskNoteInput.placeholder = 'Добавить заметку';
+    (lang === 'ru') ? viewTaskNoteInput.placeholder = 'Добавить заметку' :
+      viewTaskNoteInput.placeholder = 'Add a note';
     const viewTaskNoteButtonContainer = document.createElement('div');
     viewTaskNoteButtonContainer.classList.add('task-note-button-container');
     const viewTaskNoteButtonYes = document.createElement('button');
     viewTaskNoteButtonYes.classList.add('task-note-button-yes');
-    viewTaskNoteButtonYes.innerHTML = 'Сохранить'
+    (lang === 'ru') ? viewTaskNoteButtonYes.innerHTML = 'Сохранить' :
+      viewTaskNoteButtonYes.innerHTML = 'Save';
     const viewTaskNoteButtonNo = document.createElement('button');
     viewTaskNoteButtonNo.classList.add('task-note-button-no');
-    viewTaskNoteButtonNo.innerHTML = 'Отмена'
+    (lang === 'ru') ? viewTaskNoteButtonNo.innerHTML = 'Отмена' :
+      viewTaskNoteButtonNo.innerHTML = 'Cancel';
     const viewTaskNote = document.createElement('div');
     viewTaskNote.classList.add('task-note-view');
     const taskBordBody = document.querySelector('.task-bord-body') as HTMLElement;
