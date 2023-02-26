@@ -1,4 +1,4 @@
-import { ITask } from './components/sections/app-section';
+import { ITask, IPost } from './components/sections/app-section';
 import { apiURL } from './type';
 
 export function userLogIn(email: string, password: string) {
@@ -144,5 +144,34 @@ export function deleteTask(id: number) {
         },
  */        body: JSON.stringify(id),
     }).then((res) => res.json())
+
+}
+
+
+/// function for adding Post into post table;
+
+export function addPostIntoTable(task: Partial<IPost>): Promise<IPost> {
+    return fetch(`${apiURL}/user/addpost`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+    }).then((res) => res.json()) as Promise<IPost>
+}
+
+//function fot gettins posts for task_id http://localhost:5000/user/getposts?task_id=1
+
+export function getAllPostsForOneTask(task_id: number): Promise<IPost[]> {
+    return fetch(`${apiURL}/user/getposts?task_id=${task_id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "same-origin",
+
+    }
+    )
+        .then((res) => res.json()) as Promise<IPost[]>
 
 }

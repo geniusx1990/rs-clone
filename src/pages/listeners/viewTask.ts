@@ -1,5 +1,5 @@
-import { ITask } from "../../components/sections/app-section";
-import { getAlltasksForOneUser, deleteTask } from "../../requests";
+import { IPost, ITask } from "../../components/sections/app-section";
+import { getAlltasksForOneUser, deleteTask, getAllPostsForOneTask } from "../../requests";
 
 export const onCheckBoxChangeHandler = () => {
     const allTask = document.querySelectorAll('.task-checkbox');
@@ -19,9 +19,29 @@ export const onCheckBoxChangeHandler = () => {
                     if (task.id === task_id) {
                         const viewTaskTitle = document.querySelector('.view-task-title') as HTMLElement;
                         viewTaskTitle.innerHTML = task.title
+                        getAllPostsForOneTask(task_id).then((posts: IPost[]) => {
+                            console.log('aaa', posts)
+                            posts.forEach((post: IPost) => {
+                                const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
+                                const noteContainer = document.createElement('div');
+                                const noteText = document.createElement('div');
+                        
+                                noteContainer.classList.add('note-container');
+                                noteText.classList.add('note-text');
+                                noteText.textContent = post.content;
+                        
+                                noteContainer.append(noteText)
+                        
+                                noteBordBody.append(noteContainer);
+                        
+                              })
+                        })
                     }
                 }
             })
+            const postsContainer = <HTMLElement>document.querySelector('.task-note-view');
+            postsContainer.innerHTML = '';
+
         })
     })
 }

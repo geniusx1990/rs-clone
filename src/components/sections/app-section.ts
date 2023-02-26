@@ -1,6 +1,6 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
-import { getUserID } from "../../requests";
+import { addPostIntoTable, getAllPostsForOneTask, getUserID } from "../../requests";
 import { addTaskIntoTable, getAlltasksForOneUser, deleteTask, updateTask } from '../../requests'
 import { onCheckBoxChangeHandler } from "../../pages/listeners/viewTask";
 import { lang } from "../../pages/listeners/langs";
@@ -10,6 +10,12 @@ export interface ITask {
   user_id: number;
   content: string;
   completed: string
+}
+
+export interface IPost {
+  id: number;
+  content: string;
+  task_id: number;
 }
 
 class AppSection extends Component {
@@ -395,19 +401,87 @@ class AppSection extends Component {
     viewTaskNoteButtonYes.classList.add('task-note-button-yes');
     (lang === 'ru') ? viewTaskNoteButtonYes.innerHTML = 'Сохранить' :
       viewTaskNoteButtonYes.innerHTML = 'Save';
+
+      let task_id = +(localStorage.getItem('task_id') as string);
+
+    viewTaskNoteButtonYes.addEventListener('click', () => {
+      let task_id = +(localStorage.getItem('task_id') as string);
+
+      if (viewTaskNoteInput.value.length > 0) {
+        let post: Partial<IPost> = {
+          content: viewTaskNoteInput.value,
+          task_id: task_id
+        }
+        addPostIntoTable(post)
+          .then((data: IPost) => {
+            this.appendNote(data);
+            viewTaskNoteInput.value = '';
+            viewTaskNoteButtonYes.classList.remove('task-add-button-active');
+          }
+          )
+
+      }
+      console.log('aaa')
+    })
+
+    viewTaskNoteInput.addEventListener('keyup', () => {
+      const inputNote = document.querySelector('.task-note-input') as HTMLInputElement;
+      const noteButton = document.querySelector('.task-note-button-yes') as HTMLElement;
+      if (inputNote.value.length > 0) {
+        noteButton.classList.add('task-add-button-active')
+      } else {
+        noteButton.classList.remove('task-add-button-active')
+      }
+    })
+
     const viewTaskNoteButtonNo = document.createElement('button');
     viewTaskNoteButtonNo.classList.add('task-note-button-no');
     (lang === 'ru') ? viewTaskNoteButtonNo.innerHTML = 'Отмена' :
       viewTaskNoteButtonNo.innerHTML = 'Cancel';
     const viewTaskNote = document.createElement('div');
     viewTaskNote.classList.add('task-note-view');
-    const taskBordBody = document.querySelector('.task-bord-body') as HTMLElement;
+    //let task_id = +(localStorage.getItem('task_id') as string);
+
+/*     getAllPostsForOneTask(task_id).then((posts: IPost[]) => {
+      posts.forEach((post: IPost) => {
+        const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
+        const noteContainer = document.createElement('div');
+        const noteText = document.createElement('div');
+
+        noteContainer.classList.add('note-container');
+        noteText.classList.add('note-text');
+        noteText.textContent = post.content;
+
+        noteContainer.append(noteText)
+
+        noteBordBody.append(noteContainer);
+
+      })
+    })
+ */
     viewTaskNoteButtonContainer.append(viewTaskNoteButtonYes, viewTaskNoteButtonNo)
     viewTaskNoteInputContainer.append(viewTaskNoteInputImg, viewTaskNoteInput)
     viewTaskNoteContainer.append(viewTaskNoteTitle, viewTaskNoteInputContainer, viewTaskNoteButtonContainer)
     viewTaskTitle.append(taskPriority, viewTaskTitleName)
     viewTaskContainer.append(viewTaskContainerClose, viewTaskTitle, viewTaskTime, viewTaskNoteContainer, viewTaskNote)
     return viewTaskContainer
+  }
+
+  appendNote(post: IPost) {
+    const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
+    const viewTaskNoteInput = <HTMLInputElement>document.querySelector('.task-note-input')
+    const noteContainer = document.createElement('div');
+    const noteText = document.createElement('div');
+
+    noteContainer.classList.add('note-container');
+    noteText.classList.add('note-text');
+    noteBordBody.innerHTML = '';
+
+    noteText.innerHTML = viewTaskNoteInput.value;
+    noteContainer.append(noteText)
+
+    noteBordBody.append(noteContainer);
+
   }
 
   render() {
