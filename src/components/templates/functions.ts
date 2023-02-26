@@ -22,8 +22,8 @@ export const activePage = async (page: string) => {
   const linkHelp = await document.querySelector('.nav-help') as HTMLElement;
   const linkMain = await document.querySelector('.nav-main') as HTMLElement;
 
-  linkMain.classList.remove('active-link');
-  linkHelp.classList.remove('active-link');
+  linkMain?.classList.remove('active-link');
+  linkHelp?.classList.remove('active-link');
   if (page === 'main-page') {
     linkMain?.classList.add('active-link');
   } else if (page === 'help') {
