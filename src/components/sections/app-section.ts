@@ -95,7 +95,6 @@ class AppSection extends Component {
 
   }
 
-
   makeTaskBord() {
     const taskBord = document.createElement('div');
     taskBord.className = 'task-bord';
@@ -351,6 +350,48 @@ class AppSection extends Component {
     const viewTaskNoteButtonYes = document.createElement('button');
     viewTaskNoteButtonYes.classList.add('task-note-button-yes');
     viewTaskNoteButtonYes.innerHTML = 'Сохранить'
+
+    let user_id = +(localStorage.getItem('user_id') as string);
+    viewTaskNoteButtonYes.addEventListener('click', () => {
+
+      if (viewTaskNoteInput.value.length > 0) {
+        viewTaskNoteButtonYes.classList.remove('task-add-button-active');
+        let task_id = localStorage.getItem('task_id');
+        if (task_id !== null) {
+          let task: Partial<ITask> = {
+            id: Number(task_id),
+            content: String(viewTaskNoteInput.value)
+          }
+          updateTask(task)
+        
+        const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
+                        const noteContainer = document.createElement('div');
+                        const noteText = document.createElement('div');
+    
+                        noteContainer.classList.add('note-container');
+                         noteText.classList.add('note-text');
+                        noteBordBody.innerHTML ='';
+
+                            noteText.innerHTML = viewTaskNoteInput.value;
+                            noteContainer.append(noteText)    
+
+                        noteBordBody.append(noteContainer);
+       }
+      }
+    })
+    viewTaskNoteInput.addEventListener('keyup', () => {
+      const inputTask = document.querySelector('.task-note-input') as HTMLInputElement;
+      const taskButton = document.querySelector('.task-note-button-yes') as HTMLElement;
+      if (inputTask.value.length > 0) {
+        taskButton.classList.add('task-add-button-active')
+      } else {
+        taskButton.classList.remove('task-add-button-active')
+      }
+    })
+
+
+
+
     const viewTaskNoteButtonNo = document.createElement('button');
     viewTaskNoteButtonNo.classList.add('task-note-button-no');
     viewTaskNoteButtonNo.innerHTML = 'Отмена'

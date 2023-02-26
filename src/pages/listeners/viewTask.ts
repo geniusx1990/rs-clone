@@ -1,4 +1,4 @@
-import { ITask } from "../../components/sections/app-section";
+import AppSection, { ITask } from "../../components/sections/app-section";
 import { getAlltasksForOneUser, deleteTask } from "../../requests";
 
 export const onCheckBoxChangeHandler = () => {
@@ -19,6 +19,28 @@ export const onCheckBoxChangeHandler = () => {
                     if (task.id === task_id) {
                         const viewTaskTitle = document.querySelector('.view-task-title') as HTMLElement;
                         viewTaskTitle.innerHTML = task.title
+                      
+                        const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
+                        const noteContainer = document.createElement('div');
+                        const noteText = document.createElement('div');
+    
+                        noteContainer.classList.add('note-container');
+                         noteText.classList.add('note-text');
+                        noteBordBody.innerHTML ='';
+
+                        // заметки если массивом то через цикл ниже
+                        // notes=[...task.content]
+                            // for (let i = 0; i < notes.length; i++) {
+                            // const note = notes[i];
+                            // noteText.innerHTML =note;
+                            //  noteText.id = `${i}`
+                            // noteContainer.append(noteText)   
+                            // }
+
+                            noteText.innerHTML = task.content;
+                            noteContainer.append(noteText)    
+
+                        noteBordBody.append(noteContainer);
                     }
                 }
             })
@@ -77,5 +99,7 @@ export const viewTask = () => {
         }
     })
 }
+
+
 
 
