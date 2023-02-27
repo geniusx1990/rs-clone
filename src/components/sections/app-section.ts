@@ -41,16 +41,16 @@ class AppSection extends Component {
     let arrNames = ['Все задачи', 'Высокий приоритет', 'Низкий приоритет'];
     if (lang === 'ru') {
       x = 'Приоритет';
-           arrNames = ['Все задачи', 'Высокий приоритет', 'Низкий приоритет'];
-    
+      arrNames = ['Все задачи', 'Высокий приоритет', 'Низкий приоритет'];
+
     } else if (lang === 'en') {
       x = 'Priority';
-            arrNames = ['All tasks', 'High priority', 'Low priority'];
-          }
+      arrNames = ['All tasks', 'High priority', 'Low priority'];
+    }
 
 
     this.menu.append(this.renderMenu(x, arrNames, 'menu-item-inbox', 'inbox-all'))
-   
+
     headerMenu.append(this.menu);
     return headerMenu;
   }
@@ -121,7 +121,7 @@ class AppSection extends Component {
     taskDo.className = 'button-task';
     taskDo.classList.add('button-task-one');
     (lang === 'ru') ? taskDo.textContent = 'Задачи' : taskDo.textContent = 'Tasks';
-    
+
     taskBordButton.append(taskDo);
     const taskButton = this.createTaskButton()
     const taskAddContainer = document.createElement('div');
@@ -300,7 +300,7 @@ class AppSection extends Component {
       const SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Set high priority');
       const SelectPriorety4 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Set low priority');
     }
-   
+
     taskButtonSelect.append(taskButtonSelectPriorety)
     taskButton.append(taskButtonDoneDelite, taskButtonSelect)
     return taskButton;
@@ -371,7 +371,7 @@ class AppSection extends Component {
       viewTaskContainerClose.textContent = 'close';
     const viewTaskContainerCloseX = document.createElement('span');
     viewTaskContainerCloseX.classList.add('view-task-container-closeX');
-    viewTaskContainerCloseX.innerHTML = 'x'
+    viewTaskContainerCloseX.textContent = 'x'
     viewTaskContainerClose.append(viewTaskContainerCloseX);
     const viewTaskTitle = document.createElement('div');
     viewTaskTitle.classList.add('view-task-title');
@@ -379,7 +379,7 @@ class AppSection extends Component {
     taskPriority.classList.add('view-task-priority-container');
     const viewTaskTitleName = document.createElement('div');
     viewTaskTitleName.classList.add('view-task-title-name');
-    
+
     const viewTaskNoteContainer = document.createElement('div');
     viewTaskNoteContainer.classList.add('task-note-container');
     const viewTaskNoteTitle = document.createElement('div');
@@ -436,12 +436,12 @@ class AppSection extends Component {
 
     const viewTaskNote = document.createElement('div');
     viewTaskNote.classList.add('task-note-view');
-    
+
     viewTaskNoteButtonContainer.append(viewTaskNoteButtonYes)
     viewTaskNoteInputContainer.append(viewTaskNoteInputImg, viewTaskNoteInput)
     viewTaskNoteContainer.append(viewTaskNoteTitle, viewTaskNoteInputContainer, viewTaskNoteButtonContainer)
     viewTaskTitle.append(taskPriority, viewTaskTitleName)
-    viewTaskContainer.append(viewTaskContainerClose, viewTaskTitle,  viewTaskNoteContainer, viewTaskNote)
+    viewTaskContainer.append(viewTaskContainerClose, viewTaskTitle, viewTaskNoteContainer, viewTaskNote)
     return viewTaskContainer
   }
 
@@ -453,7 +453,7 @@ class AppSection extends Component {
 
     noteContainer.classList.add('note-container');
     noteText.classList.add('note-text');
-    
+
     noteText.innerHTML = viewTaskNoteInput.value;
     noteContainer.append(noteText)
 

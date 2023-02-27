@@ -80,10 +80,13 @@ export const listenLangs = async () => {
         if (helpTitle) {
           helpTitle.textContent = 'Умное приложение для занятых людей!';
         }
-        if (btnTaskOne && btnTaskTwo) {
-          btnTaskOne.textContent = 'Незавершенные';
+        if (btnTaskTwo) {
           btnTaskTwo.textContent = 'Завершенные';
         }
+        if (btnTaskOne) {
+          btnTaskOne.textContent = 'Задачи';
+        }
+
         if (taskAddInput && taskAddButton) {
           taskAddInput.placeholder = 'Добавить задачу';
           taskAddButton.textContent = 'Добавить';
@@ -96,10 +99,9 @@ export const listenLangs = async () => {
           selectTomorrow.textContent = 'Завтра';
           selectToday.textContent = 'Сегодня';
         }
-        if (selectRemove && selectHigh && selectMiddle && selectLow) {
+        if (selectRemove && selectHigh && selectLow) {
           selectRemove.textContent = 'Убрать приоритет';
           selectHigh.textContent = 'Установить высокий приоритет';
-          selectMiddle.textContent = 'Установить средний приоритет';
           selectLow.textContent = 'Установить низкий приоритет';
         }
         if (titleLang && taskLang && doneLang) {
@@ -107,16 +109,25 @@ export const listenLangs = async () => {
           doneLang.innerHTML = 'завершено';
           taskLang.innerHTML = 'задач(и)';
         }
-        if (inbox && list) {
-          inbox.textContent = 'Входящие';
+        if (list) {
           list.textContent = 'Списки';
         }
-        if (time && note && noteInput && btnYes && btnNo && btnClose) {
+        if (inbox) {
+          inbox.textContent = 'Приоритет';
+        }
+        if (time && btnNo) {
           time.innerHTML = 'срок';
+
+          btnNo.innerHTML = 'Отмена';
+        }
+        if (note && noteInput) {
           note.innerHTML = 'Заметки';
           noteInput.placeholder = 'Добавить заметку';
-          btnNo.innerHTML = 'Отмена';
+        }
+        if (btnYes) {
           btnYes.innerHTML = 'Сохранить';
+        }
+        if (btnClose) {
           btnClose.textContent = 'закрыть';
         }
         if (menuInbox.length > 0) {
@@ -149,9 +160,11 @@ export const listenLangs = async () => {
         if (helpTitle) {
           helpTitle.textContent = 'The smart to-do app for busy people!';
         }
-        if (btnTaskOne && btnTaskTwo) {
-          btnTaskOne.textContent = 'Incomplete';
+        if (btnTaskTwo) {
           btnTaskTwo.textContent = 'Completed';
+        }
+        if (btnTaskOne) {
+          btnTaskOne.textContent = 'Tasks';
         }
         if (taskAddInput && taskAddButton) {
           taskAddInput.placeholder = 'Add a task';
@@ -165,10 +178,9 @@ export const listenLangs = async () => {
           selectTomorrow.textContent = 'Tomorrow';
           selectToday.textContent = 'Today';
         }
-        if (selectRemove && selectHigh && selectMiddle && selectLow) {
+        if (selectRemove && selectHigh && selectLow) {
           selectRemove.textContent = 'Remove priority';
           selectHigh.textContent = 'Set high priority';
-          selectMiddle.textContent = 'Set medium priority';
           selectLow.textContent = 'Set low priority';
         }
         if (titleLang) {
@@ -179,16 +191,24 @@ export const listenLangs = async () => {
           doneLang.innerHTML = 'completed';
           taskLang.innerHTML = 'tasks';
         }
-        if (inbox && list) {
-          inbox.textContent = 'Inbox';
+        if (list) {
           list.textContent = 'Lists';
         }
-        if (time && note && noteInput && btnYes && btnNo && btnClose) {
+        if (inbox) {
+          inbox.textContent = 'Priority';
+        }
+        if (time && btnNo) {
           time.innerHTML = 'term';
+          btnNo.innerHTML = 'Cancel';
+        }
+        if (note && noteInput) {
           note.innerHTML = 'Notes';
           noteInput.placeholder = 'Add a note';
-          btnNo.innerHTML = 'Cancel';
+        }
+        if (btnYes) {
           btnYes.innerHTML = 'Save';
+        }
+        if (btnClose) {
           btnClose.textContent = 'close';
         }
         if (menuInbox.length > 0) {
