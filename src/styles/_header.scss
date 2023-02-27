@@ -1,0 +1,116 @@
+.active-link {
+  color: var(--var-white);
+}
+.header_logo {
+    width: 200px;
+    height: 100px;
+    background: url(./assets/cute_cow.svg) no-repeat;
+    cursor: pointer;
+    transition: all 0.7s;
+    &:hover,
+    &:active {
+        background: url(./assets/cute_cow_hover.svg) no-repeat;
+    }
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 3%;
+    @media (max-width: 550px) {
+      flex-wrap: wrap;
+    }
+}
+
+.navigation {
+    width: 80%;
+}
+
+.navigation-list {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    gap: 2%;
+    @media (max-width: 620px) {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: var(--var-black);
+    font-size: var(--var-font-middle);
+    transition: all 0.6s;
+    cursor: pointer;
+    &:hover,
+    &:active {
+        color: var(--var-white);
+        text-decoration: underline;
+        transition: all 0.6s;
+    }
+}
+
+.header-wrapper {
+    margin: 10px 20px;
+}
+
+.header__title {
+    font-size: 16px;
+    margin-left: 100px;
+    padding: 3%;
+    color: var(--var-white);
+    letter-spacing: 0.3px;
+    &:hover,
+    &:active {
+        color: var(--var-links);
+        transition: all 0.6s;
+        text-decoration: underline;
+    }
+}
+
+.header__menu {
+    width: 30px;
+    height: 30px;
+    background: url(./assets/burger.svg) no-repeat;
+    cursor: pointer;
+    transition: all 0.7s;
+}
+
+.header__setings {
+    width: 30px;
+    height: 30px;
+    background: url(./assets/setings.svg) no-repeat;
+    cursor: pointer;
+    transition: all 0.7s;
+}
+
+.header__input {
+    position: relative;
+    width: 20%;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    border: 1px solid #cccccc;
+    outline: none;
+    margin-right: auto;
+    &::before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-image: url(./assets/search.svg) no-repeat;
+    }
+}
+.header__langs {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 3px;
+}
+.lang__label {
+  cursor: pointer;
+  font-weight: 700;
+  &:hover {
+    color: var(--var-white);
+    transition: all 0.6s;
+  }
+}
