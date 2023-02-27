@@ -1,4 +1,4 @@
-import { IPost, ITask } from "../../components/sections/app-section";
+import AppSection, { IPost, ITask } from "../../components/sections/app-section";
 import { getAlltasksForOneUser, deleteTask, getAllPostsForOneTask } from "../../requests";
 
 export const onCheckBoxChangeHandler = () => {
