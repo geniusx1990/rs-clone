@@ -78,6 +78,9 @@ class Header extends Component {
       if (index === 2) {
         aElement.href = '#registration';
       }
+      if (index === 3) {
+        aElement.href = '#registration';
+      }
       liElement.append(aElement);
       navigationList.append(liElement);
     })

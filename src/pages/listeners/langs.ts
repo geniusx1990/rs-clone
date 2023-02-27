@@ -140,7 +140,7 @@ export const listenLangs = async () => {
           linkMain.textContent = 'Main';
           linkHelp.textContent = "Help";
           linkLog.textContent = 'Log in';
-          linkSignUp.textContent = 'Sign Up';
+          linkSignUp.textContent = 'Sign Up for free';
         }
         if (title && startBtn) {
           title.textContent = 'The smart to-do app for busy people!';

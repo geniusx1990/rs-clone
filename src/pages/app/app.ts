@@ -6,6 +6,7 @@ import RegistrationPage from '../../pages/registration/registration'
 import HelpPage from '../../pages/help/help';
 import { setCheckbox } from '../listeners/langs';
 import { activePage } from '../../components/templates/functions';
+import { openRegistration } from '../listeners/openReg';
 
 const enum PageIds {
   EmptyPage = '',
@@ -48,6 +49,7 @@ class App {
     }
     setCheckbox();
     activePage(idPage);
+    openRegistration();
   }
 
   private enableRouteChange() {

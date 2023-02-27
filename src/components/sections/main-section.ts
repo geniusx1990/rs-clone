@@ -16,8 +16,13 @@ export class MainSection extends Component {
     (lang === 'en') ? createEl('h1', 'start__header', header, 'The smart to-do app for busy people!') :
       createEl('h1', 'start__header', header, 'Умное приложение для занятых людей!');
 
-    (lang === 'en') ? createEl('button', 'btn start__btn', header, 'Sign up') :
-      createEl('button', 'btn start__btn', header, 'Регистрация');
+    const link = document.createElement('a');
+    link.classList.add('btn', 'start__btn');
+    link.href = '#registration';
+    header.append(link);
+    (lang === 'en') ? link.textContent = 'Sign up' :
+      link.textContent = 'Регистрация';
+
     this.slider.innerHTML = this.makeSliderBtn();
     header.append(this.slider);
     return header;
