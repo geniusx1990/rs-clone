@@ -166,6 +166,17 @@ class AppSection extends Component {
         addTaskIntoTable(task)
           .then((data: ITask) => {
             this.appendTask(data);
+            let user_id = +(localStorage.getItem('user_id') as string);
+            getAlltasksForOneUser(user_id).then((tasks: ITask[]) => {
+
+              const tasksDoneCounter = <HTMLDivElement>document.querySelector('.task-title-done');
+              const tasksAllCounter = <HTMLDivElement>document.querySelector('.task-title-do');
+              const tasksCompletedLength = tasks.filter(item => item.completed === 'completed').length;
+              const tasksAllCount = tasks.length;
+              tasksAllCounter.textContent = tasksAllCount.toString();
+              tasksDoneCounter.textContent = tasksCompletedLength.toString();
+            })
+
             taskAddInput.value = ''
             taskAddButton.classList.remove('task-add-button-active')
             onCheckBoxChangeHandler();
@@ -215,6 +226,13 @@ class AppSection extends Component {
           taskText.classList.add('task-done');
         }
 
+        const tasksDoneCounter = <HTMLDivElement>document.querySelector('.task-title-done');
+        const tasksAllCounter = <HTMLDivElement>document.querySelector('.task-title-do');
+        const tasksCompletedLength = tasks.filter(item => item.completed === 'completed').length;
+        const tasksAllCount = tasks.length;
+        tasksAllCounter.textContent = tasksAllCount.toString();
+        tasksDoneCounter.textContent = tasksCompletedLength.toString();
+
         taskText.innerHTML = task.title;
         taskText.setAttribute("for", `${task.id}`);
         taskText.id = `${task.id}`
@@ -226,6 +244,7 @@ class AppSection extends Component {
     taskBord.append(taskBordHeder, taskBordBody)
     return taskBord;
   }
+
 
   createTaskButton() {
     const taskButton = document.createElement('div');
@@ -243,6 +262,10 @@ class AppSection extends Component {
           completed: 'completed'
         }
         updateTask(task)
+        this.updateCounter();
+
+        const containerClose = document.querySelector('.view-task-container');
+        containerClose?.classList.add('hover-task-container')
         const allTask = document.querySelectorAll('.task-checkbox-text');
         allTask.forEach(task => {
           if (task.id === task_id) {
@@ -263,6 +286,7 @@ class AppSection extends Component {
       let task_id = localStorage.getItem('task_id');
       if (task_id !== null) {
         deleteTask(Number(task_id))
+        this.updateCounter();
         const containerClose = document.querySelector('.view-task-container');
         containerClose?.classList.add('hover-task-container')
         const allTask = document.querySelectorAll('.task-checkbox');
@@ -315,6 +339,20 @@ class AppSection extends Component {
     return taskButton;
   }
 
+  updateCounter() {
+    let user_id = +(localStorage.getItem('user_id') as string);
+    getAlltasksForOneUser(user_id).then((tasks: ITask[]) => {
+
+      const tasksDoneCounter = <HTMLDivElement>document.querySelector('.task-title-done');
+      const tasksAllCounter = <HTMLDivElement>document.querySelector('.task-title-do');
+      const tasksCompletedLength = tasks.filter(item => item.completed === 'completed').length;
+      const tasksAllCount = tasks.length;
+      tasksAllCounter.textContent = tasksAllCount.toString();
+      tasksDoneCounter.textContent = tasksCompletedLength.toString();
+    })
+
+  }
+
   makeInfoBord() {
     const infoBord = document.createElement('div');
     infoBord.className = 'info-bord';
@@ -331,7 +369,8 @@ class AppSection extends Component {
     titleTaskDo.classList.add('task-title-container');
     const titleTaskDoTitle = document.createElement('div');
     titleTaskDoTitle.classList.add('task-title-do');
-    titleTaskDoTitle.innerHTML = '0'
+
+    //titleTaskDoTitle.innerHTML = '0'
     const titleTaskDoCount = document.createElement('div');
     titleTaskDoCount.classList.add('task-count-do', 'task-count-do-task');
     (lang === 'ru') ? titleTaskDoCount.innerHTML = 'задач(и)' :
@@ -342,8 +381,8 @@ class AppSection extends Component {
     const titleTaskDone = document.createElement('div');
     titleTaskDone.classList.add('task-title-container');
     const titleTaskDoneTitle = document.createElement('div');
-    titleTaskDoneTitle.classList.add('task-title-do');
-    titleTaskDoneTitle.innerHTML = '0'
+    titleTaskDoneTitle.classList.add('task-title-done');
+    //titleTaskDoneTitle.innerHTML = '0'
     const titleTaskDoneCount = document.createElement('div');
     titleTaskDoneCount.classList.add('task-count-do', 'task-completed');
     (lang === 'ru') ? titleTaskDoneCount.innerHTML = 'завершено' :
@@ -402,7 +441,7 @@ class AppSection extends Component {
     (lang === 'ru') ? viewTaskNoteButtonYes.innerHTML = 'Сохранить' :
       viewTaskNoteButtonYes.innerHTML = 'Save';
 
-      let task_id = +(localStorage.getItem('task_id') as string);
+    let task_id = +(localStorage.getItem('task_id') as string);
 
     viewTaskNoteButtonYes.addEventListener('click', () => {
       let task_id = +(localStorage.getItem('task_id') as string);
@@ -442,23 +481,23 @@ class AppSection extends Component {
     viewTaskNote.classList.add('task-note-view');
     //let task_id = +(localStorage.getItem('task_id') as string);
 
-/*     getAllPostsForOneTask(task_id).then((posts: IPost[]) => {
-      posts.forEach((post: IPost) => {
-        const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
-        const noteContainer = document.createElement('div');
-        const noteText = document.createElement('div');
-
-        noteContainer.classList.add('note-container');
-        noteText.classList.add('note-text');
-        noteText.textContent = post.content;
-
-        noteContainer.append(noteText)
-
-        noteBordBody.append(noteContainer);
-
-      })
-    })
- */
+    /*     getAllPostsForOneTask(task_id).then((posts: IPost[]) => {
+          posts.forEach((post: IPost) => {
+            const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
+            const noteContainer = document.createElement('div');
+            const noteText = document.createElement('div');
+    
+            noteContainer.classList.add('note-container');
+            noteText.classList.add('note-text');
+            noteText.textContent = post.content;
+    
+            noteContainer.append(noteText)
+    
+            noteBordBody.append(noteContainer);
+    
+          })
+        })
+     */
     viewTaskNoteButtonContainer.append(viewTaskNoteButtonYes, viewTaskNoteButtonNo)
     viewTaskNoteInputContainer.append(viewTaskNoteInputImg, viewTaskNoteInput)
     viewTaskNoteContainer.append(viewTaskNoteTitle, viewTaskNoteInputContainer, viewTaskNoteButtonContainer)

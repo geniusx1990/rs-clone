@@ -34,11 +34,10 @@ class HeaderApp extends Component {
 
     logoSetings.addEventListener('click', (event) => {
       event.preventDefault();
-      localStorage.removeItem("cookie"); //log out by removing cookie from local storage
-
+      localStorage.removeItem("user_id")
+      localStorage.removeItem("email")
+      localStorage.removeItem("task_id")
       location.href = "../#main-page";
-      console.log(localStorage.getItem('email'));
-
     })
 
     return headerWrapper;
