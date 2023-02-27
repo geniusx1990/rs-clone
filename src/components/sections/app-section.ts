@@ -95,6 +95,8 @@ class AppSection extends Component {
 
     taskContainer.classList.add('task-checkbox-container');
     taskPriority.classList.add('task-priority-container');
+    taskPriority.id = 'priority-'+task.id.toString();
+
     taskCheckBox.setAttribute("type", "checkbox");
     taskCheckBox.setAttribute("name", "task");
     taskCheckBox.classList.add('task-checkbox');
