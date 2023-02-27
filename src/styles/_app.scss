@@ -123,6 +123,8 @@
 }
 
 .button-task {
+    padding-right: 5px;
+    padding-left: 5px;
     margin-right: 4%;
     border: 1px #80808030 solid;
     cursor: pointer;
@@ -265,7 +267,8 @@
     background: #fffac0;
 }
 
-.task-priority-container {
+.task-priority-container,
+.view-task-priority-container {
     background-color: var(--var-priority-none);
     background-attachment: scroll;
     width: 3px;
@@ -362,11 +365,11 @@
     font-size: 22px;
     color: #0060bf;
 }
+
 .task-title-done {
     font-size: 22px;
     color: #0060bf;
 }
-
 
 .task-count-do {
     font-size: 14px;
@@ -408,7 +411,8 @@
     white-space: nowrap;
 }
 
-.view-task-title {
+.view-task-title,
+.view-task-title-name {
     height: 25px;
     display: flex;
     flex-direction: row;
@@ -417,6 +421,10 @@
     padding-left: 10px;
     padding-bottom: 10px;
     border-bottom: 0.5px rgba(128, 128, 128, 0.2392156863) solid;
+}
+
+.view-task-title-name {
+    margin: 0;
 }
 
 .view-task-time {
@@ -470,4 +478,15 @@
 .task-done {
     color: red;
     text-decoration: line-through;
+}
+
+.note-container {
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.note-text {
+    color: #2d4653;
+    font-family: cursive;
+    font-size: 16px;
 }

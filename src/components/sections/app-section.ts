@@ -37,27 +37,20 @@ class AppSection extends Component {
     headerMenu.append(logo);
 
     const logoTitle = createEl("div", "header__title", logo, "Remember the milk");
-    let x = 'Входящие';
-    let y = 'Списки';
-    let arrNames = ['Все задачи', 'Сегодня', 'Завтра', 'Неделя'];
-    let arrList = ['Личное', 'Работа'];
-
+    let x = 'Приоритет';
+    let arrNames = ['Все задачи', 'Высокий приоритет', 'Низкий приоритет'];
     if (lang === 'ru') {
-      x = 'Входящие';
-      y = 'Списки';
-      arrNames = ['Все задачи', 'Сегодня', 'Завтра', 'Неделя'];
-      arrList = ['Личное', 'Работа'];
+      x = 'Приоритет';
+           arrNames = ['Все задачи', 'Высокий приоритет', 'Низкий приоритет'];
+    
     } else if (lang === 'en') {
-      x = 'Inbox';
-      y = 'Lists';
-      arrNames = ['All tasks', 'Today', 'Tomorrow', 'This week'];
-      arrList = ['Personal', 'Work'];
-    }
+      x = 'Priority';
+            arrNames = ['All tasks', 'High priority', 'Low priority'];
+          }
 
 
     this.menu.append(this.renderMenu(x, arrNames, 'menu-item-inbox', 'inbox-all'))
-    this.menu.append(this.renderMenu(y, arrList, 'menu-item-list', 'inbox-list'))
-
+   
     headerMenu.append(this.menu);
     return headerMenu;
   }
@@ -124,17 +117,12 @@ class AppSection extends Component {
 
     const taskBordButton = document.createElement('div');
     taskBordButton.classList.add('button-task-bord');
-    const taskDo = document.createElement('button');
+    const taskDo = document.createElement('div');
     taskDo.className = 'button-task';
     taskDo.classList.add('button-task-one');
-    (lang === 'ru') ? taskDo.textContent = 'Незавершенные' : taskDo.textContent = 'Incomplete';
-    const taskDone = document.createElement('button');
-    taskDone.className = 'button-task';
-    taskDone.classList.add('button-task-two');
-    (lang === 'ru') ? taskDone.textContent = 'Завершенные' : taskDone.textContent = 'Completed';
-
-
-    taskBordButton.append(taskDo, taskDone);
+    (lang === 'ru') ? taskDo.textContent = 'Задачи' : taskDo.textContent = 'Tasks';
+    
+    taskBordButton.append(taskDo);
     const taskButton = this.createTaskButton()
     const taskAddContainer = document.createElement('div');
     taskAddContainer.classList.add('task-add-container');
@@ -306,34 +294,14 @@ class AppSection extends Component {
     if (lang === 'ru') {
       const SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Убрать приоритет');
       const SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Установить высокий приоритет');
-      const SelectPriorety3 = createEl("option", "option-select option-select-middle", taskButtonSelectPriorety, 'Установить средний приоритет');
       const SelectPriorety4 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Установить низкий приоритет');
     } else if (lang === 'en') {
       const SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Remove priority');
       const SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Set high priority');
-      const SelectPriorety3 = createEl("option", "option-select option-select-middle", taskButtonSelectPriorety, 'Set medium priority');
       const SelectPriorety4 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Set low priority');
     }
-    const taskButtonSelectList = document.createElement('select');
-    taskButtonSelectList.classList.add('task-select');
-    if (lang === 'ru') {
-      const SelectList1 = createEl("option", "option-select option-select-personal", taskButtonSelectList, 'Личное');
-      const SelectListy2 = createEl("option", "option-select option-select-work", taskButtonSelectList, 'Работа');
-    } else if (lang === 'en') {
-      const SelectList1 = createEl("option", "option-select option-select-personal", taskButtonSelectList, 'Personal');
-      const SelectListy2 = createEl("option", "option-select option-select-work", taskButtonSelectList, 'Work');
-    }
-
-    const taskButtonSelectTime = document.createElement('select');
-    taskButtonSelectTime.classList.add('task-select');
-    if (lang === 'ru') {
-      const SelectTime1 = createEl("option", "option-select option-select-today", taskButtonSelectTime, 'Сегодня');
-      const SelectTime2 = createEl("option", "option-select option-select-tomorrow", taskButtonSelectTime, 'Завтра');
-    } else if (lang === 'en') {
-      const SelectTime1 = createEl("option", "option-select option-select-today", taskButtonSelectTime, 'Today');
-      const SelectTime2 = createEl("option", "option-select option-select-tomorrow", taskButtonSelectTime, 'Tomorrow');
-    }
-    taskButtonSelect.append(taskButtonSelectPriorety, taskButtonSelectList, taskButtonSelectTime)
+   
+    taskButtonSelect.append(taskButtonSelectPriorety)
     taskButton.append(taskButtonDoneDelite, taskButtonSelect)
     return taskButton;
   }
@@ -408,16 +376,10 @@ class AppSection extends Component {
     const viewTaskTitle = document.createElement('div');
     viewTaskTitle.classList.add('view-task-title');
     const taskPriority = document.createElement('div');
-    taskPriority.classList.add('task-priority-container');
+    taskPriority.classList.add('view-task-priority-container');
     const viewTaskTitleName = document.createElement('div');
     viewTaskTitleName.classList.add('view-task-title-name');
-    const viewTaskTime = document.createElement('div');
-    viewTaskTime.classList.add('view-task-time', 'view-task-time-lang');
-    (lang === 'ru') ? viewTaskTime.innerHTML = 'срок' :
-      viewTaskTime.innerHTML = 'term';
-    const viewTaskTimeValue = document.createElement('div');
-    viewTaskTimeValue.classList.add('view-task-time-value');
-    viewTaskTime.append(viewTaskTimeValue);
+    
     const viewTaskNoteContainer = document.createElement('div');
     viewTaskNoteContainer.classList.add('task-note-container');
     const viewTaskNoteTitle = document.createElement('div');
@@ -472,36 +434,14 @@ class AppSection extends Component {
       }
     })
 
-    const viewTaskNoteButtonNo = document.createElement('button');
-    viewTaskNoteButtonNo.classList.add('task-note-button-no');
-    (lang === 'ru') ? viewTaskNoteButtonNo.innerHTML = 'Отмена' :
-      viewTaskNoteButtonNo.innerHTML = 'Cancel';
     const viewTaskNote = document.createElement('div');
     viewTaskNote.classList.add('task-note-view');
-    //let task_id = +(localStorage.getItem('task_id') as string);
-
-    /*     getAllPostsForOneTask(task_id).then((posts: IPost[]) => {
-          posts.forEach((post: IPost) => {
-            const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
-            const noteContainer = document.createElement('div');
-            const noteText = document.createElement('div');
     
-            noteContainer.classList.add('note-container');
-            noteText.classList.add('note-text');
-            noteText.textContent = post.content;
-    
-            noteContainer.append(noteText)
-    
-            noteBordBody.append(noteContainer);
-    
-          })
-        })
-     */
-    viewTaskNoteButtonContainer.append(viewTaskNoteButtonYes, viewTaskNoteButtonNo)
+    viewTaskNoteButtonContainer.append(viewTaskNoteButtonYes)
     viewTaskNoteInputContainer.append(viewTaskNoteInputImg, viewTaskNoteInput)
     viewTaskNoteContainer.append(viewTaskNoteTitle, viewTaskNoteInputContainer, viewTaskNoteButtonContainer)
     viewTaskTitle.append(taskPriority, viewTaskTitleName)
-    viewTaskContainer.append(viewTaskContainerClose, viewTaskTitle, viewTaskTime, viewTaskNoteContainer, viewTaskNote)
+    viewTaskContainer.append(viewTaskContainerClose, viewTaskTitle,  viewTaskNoteContainer, viewTaskNote)
     return viewTaskContainer
   }
 
@@ -509,12 +449,11 @@ class AppSection extends Component {
     const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
     const viewTaskNoteInput = <HTMLInputElement>document.querySelector('.task-note-input')
     const noteContainer = document.createElement('div');
-    const noteText = document.createElement('div');
+    const noteText = document.createElement('li');
 
     noteContainer.classList.add('note-container');
     noteText.classList.add('note-text');
-    noteBordBody.innerHTML = '';
-
+    
     noteText.innerHTML = viewTaskNoteInput.value;
     noteContainer.append(noteText)
 

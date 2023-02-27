@@ -17,14 +17,14 @@ export const onCheckBoxChangeHandler = () => {
                 for (let i = 0; i < tasks.length; i++) {
                     const task = tasks[i];
                     if (task.id === task_id) {
-                        const viewTaskTitle = document.querySelector('.view-task-title') as HTMLElement;
+                        const viewTaskTitle = document.querySelector('.view-task-title-name') as HTMLElement;
                         viewTaskTitle.innerHTML = task.title
                         getAllPostsForOneTask(task_id).then((posts: IPost[]) => {
                             console.log('aaa', posts)
                             posts.forEach((post: IPost) => {
                                 const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
                                 const noteContainer = document.createElement('div');
-                                const noteText = document.createElement('div');
+                                const noteText = document.createElement('li');
                         
                                 noteContainer.classList.add('note-container');
                                 noteText.classList.add('note-text');
