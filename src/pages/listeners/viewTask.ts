@@ -69,6 +69,7 @@ export const viewTask = () => {
                 if (checkedNum === +target.id) {
                     checkedNum = 0
                     viewBox.classList.add('hover-task-container');
+                    localStorage.removeItem("task_id")
 
                     setTimeout(() => {
                         for (let i = 0; i < checkboxs.length; i++) {
@@ -92,7 +93,7 @@ export const viewTask = () => {
                 let checkbox = checkboxs[i];
                 checkboxsCont[i].classList.remove('task-checkbox-container-active');
                 checkbox.checked = false;
-
+                localStorage.removeItem("task_id")
             }
         }
     })

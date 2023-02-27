@@ -278,6 +278,14 @@
     vertical-align: top;
 }
 
+.priority-high {
+    background-color: red
+}
+
+.priority-low {
+    background-color: greenyellow
+}
+
 .task-checkbox {
     -webkit-appearance: none;
     appearance: none;
