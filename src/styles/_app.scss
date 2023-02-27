@@ -286,6 +286,10 @@
     background-color: greenyellow
 }
 
+.priority-none {
+    background-color: var(--var-priority-none);
+}
+
 .task-checkbox {
     -webkit-appearance: none;
     appearance: none;
