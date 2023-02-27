@@ -3,7 +3,6 @@ import { getAlltasksForOneUser, deleteTask, getAllPostsForOneTask } from "../../
 
 export const onCheckBoxChangeHandler = () => {
     const allTask = document.querySelectorAll('.task-checkbox');
-    //console.log(allTask);
     allTask.forEach(task => {
         task.addEventListener('change', (event) => {
             const taskCheckBox = (event.target as HTMLInputElement);
@@ -20,7 +19,6 @@ export const onCheckBoxChangeHandler = () => {
                         const viewTaskTitle = document.querySelector('.view-task-title-name') as HTMLElement;
                         viewTaskTitle.innerHTML = task.title
                         getAllPostsForOneTask(task_id).then((posts: IPost[]) => {
-                            console.log('aaa', posts)
                             posts.forEach((post: IPost) => {
                                 const noteBordBody = document.querySelector('.task-note-view') as HTMLElement;
                                 const noteContainer = document.createElement('div');

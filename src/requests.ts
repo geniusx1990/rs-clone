@@ -175,3 +175,14 @@ export function getAllPostsForOneTask(task_id: number): Promise<IPost[]> {
         .then((res) => res.json()) as Promise<IPost[]>
 
 }
+
+export function prioritychange(task: Partial<ITask>): Promise<ITask>{
+    return fetch(`${apiURL}/user/prioritychange`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+    }).then((res) => res.json()) as Promise<ITask>
+
+}

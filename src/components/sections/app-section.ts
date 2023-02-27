@@ -1,7 +1,7 @@
 import Component from "../templates/component";
 import { createEl } from "../templates/functions";
 import { addPostIntoTable, getAllPostsForOneTask, getUserID } from "../../requests";
-import { addTaskIntoTable, getAlltasksForOneUser, deleteTask, updateTask } from '../../requests'
+import { addTaskIntoTable, getAlltasksForOneUser, deleteTask, updateTask, prioritychange } from '../../requests'
 import { onCheckBoxChangeHandler } from "../../pages/listeners/viewTask";
 import { lang } from "../../pages/listeners/langs";
 export interface ITask {
@@ -9,6 +9,7 @@ export interface ITask {
   title: string;
   user_id: number;
   content: string;
+  priority: string;
   completed: string
 }
 
@@ -148,6 +149,7 @@ class AppSection extends Component {
           title: taskAddInput.value,
           user_id: user_id,
           content: 'content',
+          priority: 'none',
           completed: 'not completed'
         }
         addTaskIntoTable(task)
@@ -203,6 +205,13 @@ class AppSection extends Component {
 
         taskContainer.classList.add('task-checkbox-container');
         taskPriority.classList.add('task-priority-container');
+        if (task.priority === 'low') {
+          taskPriority.classList.add('priority-low');
+        }
+        taskPriority.id = 'priority-'+task.id.toString();
+        if (task.priority === 'high') {
+          taskPriority.classList.add('priority-high');
+        }
         taskCheckBox.setAttribute("type", "checkbox");
         taskCheckBox.setAttribute("name", "task");
         taskCheckBox.classList.add('task-checkbox');
@@ -256,13 +265,9 @@ class AppSection extends Component {
         const allTask = document.querySelectorAll('.task-checkbox-text');
         allTask.forEach(task => {
           if (task.id === task_id) {
-            console.log(task)
             task.classList.add('task-done')
           }
         })
-
-        console.log(task);
-
       }
     })
 
@@ -308,7 +313,19 @@ class AppSection extends Component {
     SelectPriorety3.value = 'low';
 
     taskButtonSelectPriorety.addEventListener('change', () => {
-      console.log(taskButtonSelectPriorety.value)
+      let task_id = localStorage.getItem('task_id');
+      let task: Partial<ITask> = {
+        id: Number(task_id),
+        priority: taskButtonSelectPriorety.value
+      }
+      prioritychange(task).then(() => {
+        const prioriityEelement = document.querySelector(`.task-priority-container#priority-${task.id}`);
+        if(prioriityEelement){
+          prioriityEelement.className = 'task-priority-container';
+          prioriityEelement.classList.add('priority-'+task.priority);
+        }
+      })
+
     })
 
 
@@ -430,9 +447,7 @@ class AppSection extends Component {
             viewTaskNoteButtonYes.classList.remove('task-add-button-active');
           }
           )
-
       }
-      console.log('aaa')
     })
 
     viewTaskNoteInput.addEventListener('keyup', () => {
