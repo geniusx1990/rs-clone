@@ -291,16 +291,27 @@ class AppSection extends Component {
     taskButtonSelect.classList.add('task-button-select');
     const taskButtonSelectPriorety = document.createElement('select');
     taskButtonSelectPriorety.classList.add('task-select');
+   
+    let SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Remove priority') as HTMLOptionElement;
+    let SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Set high priority')as HTMLOptionElement;
+    let SelectPriorety3 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Set low priority')as HTMLOptionElement;
+
+   
     if (lang === 'ru') {
-      const SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Убрать приоритет');
-      const SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Установить высокий приоритет');
-      const SelectPriorety4 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Установить низкий приоритет');
-    } else if (lang === 'en') {
-      const SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Remove priority');
-      const SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Set high priority');
-      const SelectPriorety4 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Set low priority');
+       SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Убрать приоритет') as HTMLOptionElement;
+      SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Установить высокий приоритет')as HTMLOptionElement;
+      SelectPriorety3 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Установить низкий приоритет')as HTMLOptionElement;
     }
    
+   SelectPriorety1.value='none';
+SelectPriorety2.value='high';
+SelectPriorety3.value='low';
+
+taskButtonSelectPriorety.addEventListener('change', () => {
+  console.log(taskButtonSelectPriorety.value)
+})
+
+
     taskButtonSelect.append(taskButtonSelectPriorety)
     taskButton.append(taskButtonDoneDelite, taskButtonSelect)
     return taskButton;

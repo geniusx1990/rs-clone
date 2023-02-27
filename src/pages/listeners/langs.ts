@@ -55,11 +55,10 @@ export const listenLangs = async () => {
       const btnNo = document.querySelector('.task-note-button-no') as HTMLElement;
       const btnClose = document.querySelector('.view-task-container-close') as HTMLElement;
       const menuInbox = document.querySelectorAll('.menu-item-inbox');
-      let menuInboxRu = ['Все задачи', 'Сегодня', 'Завтра', 'Неделя'];
-      let menuInboxEn = ['All tasks', 'Today', 'Tomorrow', 'This week'];
+      let menuInboxRu = ['Все задачи', 'Высокий приоритет', 'Низкий приоритет'];
+      let menuInboxEn = ['All tasks', 'High priority', 'Low priority'];
       const menuList = document.querySelectorAll('.menu-item-list');
-      let menuListRu = ['Личное', 'Работа'];
-      let menuListEn = ['Personal', 'Work'];
+      
 
       if (target.id === 'ru') {
         lang = 'ru';
@@ -126,7 +125,7 @@ export const listenLangs = async () => {
         }
         if (menuList.length > 0) {
           for (let i = 0; i < menuList.length; i++) {
-            menuList[i].textContent = menuListRu[i];
+            // menuList[i].textContent = menuListRu[i];
           }
         }
 
@@ -198,7 +197,7 @@ export const listenLangs = async () => {
         }
         if (menuList.length > 0) {
           for (let i = 0; i < menuList.length; i++) {
-            menuList[i].textContent = menuListEn[i];
+            // menuList[i].textContent = menuListEn[i];
           }
         }
       }
