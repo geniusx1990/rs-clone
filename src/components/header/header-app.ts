@@ -24,8 +24,6 @@ class HeaderApp extends Component {
     const headerWrapper = document.createElement('div');
     headerWrapper.className = 'header-wrapper';
 
-    const logoMenu = createEl("div", "header__menu", headerWrapper);
-    const inputHeder = createEl("input", "header__input", headerWrapper);
     const langHtml = this.renderLangs();
 
     headerWrapper.append(langHtml);
