@@ -297,17 +297,19 @@ class AppSection extends Component {
     const taskButtonSelectPriorety = document.createElement('select');
     taskButtonSelectPriorety.classList.add('task-select');
 
+    let SelectPriorety = createEl("option", "option-select", taskButtonSelectPriorety, 'Choose a priority') as HTMLOptionElement;
     let SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Remove priority') as HTMLOptionElement;
     let SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Set high priority') as HTMLOptionElement;
     let SelectPriorety3 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Set low priority') as HTMLOptionElement;
 
 
     if (lang === 'ru') {
+      SelectPriorety = createEl("option", "option-select", taskButtonSelectPriorety, 'Выбери приоритете') as HTMLOptionElement;
       SelectPriorety1 = createEl("option", "option-select option-select-pr", taskButtonSelectPriorety, 'Убрать приоритет') as HTMLOptionElement;
       SelectPriorety2 = createEl("option", "option-select option-select-high", taskButtonSelectPriorety, 'Установить высокий приоритет') as HTMLOptionElement;
       SelectPriorety3 = createEl("option", "option-select option-select-low", taskButtonSelectPriorety, 'Установить низкий приоритет') as HTMLOptionElement;
     }
-
+    SelectPriorety.value = '0';
     SelectPriorety1.value = 'none';
     SelectPriorety2.value = 'high';
     SelectPriorety3.value = 'low';
@@ -320,12 +322,17 @@ class AppSection extends Component {
       }
       prioritychange(task).then(() => {
         const prioriityEelement = document.querySelector(`.task-priority-container#priority-${task.id}`);
+        const prioriityEelementV = document.querySelector(`.view-task-priority-container`) as HTMLElement;
         if(prioriityEelement){
+          prioriityEelementV.classList.remove('priority-high');
+          prioriityEelementV.classList.remove('priority-low');
+          prioriityEelementV.classList.remove('priority-none');
+          prioriityEelementV.classList.add('priority-'+task.priority);
           prioriityEelement.className = 'task-priority-container';
           prioriityEelement.classList.add('priority-'+task.priority);
         }
       })
-
+      taskButtonSelectPriorety.value='0'
     })
 
 

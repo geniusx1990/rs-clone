@@ -40,7 +40,7 @@ export const listenLangs = async () => {
       const selectToday = document.querySelector('.option-select-today') as HTMLElement;
       const selectRemove = document.querySelector('.option-select-pr') as HTMLElement;
       const selectHigh = document.querySelector('.option-select-high') as HTMLElement;
-      const selectMiddle = document.querySelector('.option-select-middle') as HTMLElement;
+      const select = document.querySelector('.option-select') as HTMLElement;
       const selectLow = document.querySelector('.option-select-low') as HTMLElement;
       const titleLang = document.querySelector('.task-title-lang') as HTMLElement;
       const taskLang = document.querySelector('.task-count-do-task') as HTMLElement;
@@ -98,7 +98,8 @@ export const listenLangs = async () => {
           selectTomorrow.textContent = 'Завтра';
           selectToday.textContent = 'Сегодня';
         }
-        if (selectRemove && selectHigh && selectLow) {
+        if (select&&selectRemove && selectHigh && selectLow) {
+          select.textContent = 'Выбрать приоритет';
           selectRemove.textContent = 'Убрать приоритет';
           selectHigh.textContent = 'Установить высокий приоритет';
           selectLow.textContent = 'Установить низкий приоритет';
@@ -177,7 +178,8 @@ export const listenLangs = async () => {
           selectTomorrow.textContent = 'Tomorrow';
           selectToday.textContent = 'Today';
         }
-        if (selectRemove && selectHigh && selectLow) {
+        if (select && selectRemove && selectHigh && selectLow) {
+          select.textContent = 'Choose a priority';
           selectRemove.textContent = 'Remove priority';
           selectHigh.textContent = 'Set high priority';
           selectLow.textContent = 'Set low priority';
